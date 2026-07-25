@@ -669,13 +669,7 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
 <nav class="nav" id="nav">
   <div class="wrap nav-in">
     <a href="#top" class="logo">ESTÁS PARA MÁS</a>
-    <div class="nav-links">
-      <a href="#el-dia">El día</a>
-      <a href="#historia">Valentina</a>
-      <a href="#camino">El camino</a>
-      <a href="#historias">Historias</a>
-      <a href="#dudas">Dudas</a>
-    </div>
+    
     <a href="#reservar" class="nav-cta">Reservar mi lugar</a>
   </div>
 </nav>
@@ -687,72 +681,67 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
     <div class="hero-grid">
       <div>
         <div class="eyebrow">Evento presencial · Buenos Aires</div>
-        <h1>Una vida 7<br>no se arregla <em>sola.</em></h1>
+        <h1>Hay una forma de vivir que todavía no conoces</h1>
         <p class="hero-sub">
           No te separaste. No te echaron. No pasó nada.
           <strong>Y ese es exactamente el problema.</strong>
         </p>
         <div class="hero-story">
-          Un 4 te obliga a moverte. Un 7 te deja quieta doce años esperando que mejore
-          solo. <b>El 17 de agosto dejás de esperar.</b>
+          Un 4/10 te obliga a moverte. Un 7/10 te deja quieta doce años esperando que mejore
+          solo. <b>El 17 de agosto dejas de esperar.</b>
         </div>
         <div class="hero-ctas">
-          <a href="#reservar" class="btn btn-primary">Reservar mi lugar <span class="arw">→</span></a>
-          <a href="#el-dia" class="btn btn-ghost">Ver qué pasa ese día</a>
+          <a href="#reservar" class="btn btn-primary">Ver qué pasa ese día <span class="arw">→</span></a>
         </div>
         <div class="hero-micro"><span class="dot"></span> Lunes 17 de agosto · Feriado · $45.000 hasta el 10/08</div>
       </div>
 
       <!-- FIRMA: el medidor -->
-      <div class="meter">
-        <div class="meter-q">Ponele un número a tu vida.</div>
-        <div class="meter-hint">Del 1 al 10. Rápido, no lo pienses.</div>
-        <div class="scale" id="scale"></div>
-        <div class="scale-lbl"><span>Insostenible</span><span>Exactamente la que querés</span></div>
-        <div class="meter-out" id="out">
-          <strong>Elegí un número.</strong>
-          La mayoría tarda menos de dos segundos en saber cuál es.
+      <div class="meter" id="form-container">
+        <style>
+            .form-options { display: flex; flex-direction: column; gap: 8px; margin-top: 15px; }
+            .form-options-flex { display: flex; gap: 10px; margin-top: 15px; }
+            .form-options .notch, .form-options-flex .notch { height: auto; padding: 12px; font-size: 0.9rem; text-transform: none; justify-content: center; }
+            .form-result-text { font-size: 1rem; color: #fff; line-height: 1.6; }
+            .form-result-text strong { font-family: var(--display); font-size: 1.2rem; color: var(--bronce); display: block; margin-bottom: 10px; }
+        </style>
+        <div id="step-1">
+            <div class="meter-q">¿Que área de tu vida querés que mejore?</div>
+            <div class="form-options">
+                <button class="notch" onclick="nextStep(1, 'Relaciones amorosas')">Relaciones amorosas</button>
+                <button class="notch" onclick="nextStep(1, 'Entorno/amistades')">Entorno/amistades</button>
+                <button class="notch" onclick="nextStep(1, 'Trabajo/profesión')">Trabajo/profesión</button>
+                <button class="notch" onclick="nextStep(1, 'Económica')">Económica</button>
+                <button class="notch" onclick="nextStep(1, 'Conmigo misma')">Conmigo misma</button>
+            </div>
         </div>
+        <div id="step-2" style="display:none;">
+            <div class="meter-q">Del 1 al 10 ¿Cómo def tu vida?</div>
+            <div class="scale" id="scale-new" style="margin-top: 15px;"></div>
+        </div>
+        <div id="step-3" style="display:none;">
+            <div class="meter-q">¿Estás dispuesta a tomar la responsabilidad que tu vida conlleva?</div>
+            <div class="form-options-flex">
+                <button class="notch" onclick="nextStep(3, 'Si')">Si</button>
+                <button class="notch" onclick="nextStep(3, 'No')">No</button>
+            </div>
+        </div>
+        <div id="step-result" style="display:none;">
+            <div class="meter-out" id="form-result" style="border-top:none; margin-top:0; padding-top:0;"></div>
+        </div>
+      </div>
       </div>
     </div>
 
     <!-- stats de confianza -->
-    <div class="hero-stats">
-      <div class="hstat"><b>11 hs</b><span>Un día entero,<br>sin celular</span></div>
-      <div class="hstat"><b>150</b><span>Mujeres en la<br>misma sala</span></div>
-      <div class="hstat"><b>1</b><span>Decisión que venís<br>postergando, tomada</span></div>
-      <div class="hstat"><b>3 meses</b><span>De acompañamiento<br>después</span></div>
+    <div class="hero-stats" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="hstat"><b>11 hs</b><span>Una transformación de verdad de 9 am a 8 pm</span></div>
+      <div class="hstat"><b>Feriado</b><span>17 de agosto</span></div>
+      <div class="hstat"><b>150</b><span>Mujeres en un mismo salón premium en capital federal</span></div>
     </div>
+  </div>
   </div>
 </header>
-
-<!-- ============ TRUST BAR ============ -->
-<section class="trust">
-  <div class="wrap">
-    <div class="trust-grid">
-      <div class="tcell">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
-        <div><b>Es feriado</b><span>No pedís el día ni avisás en el trabajo</span></div>
-      </div>
-      <div class="tcell">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 2l2.4 6.9H22l-6 4.3 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.3h7.6z"/></svg>
-        <div><b>Una sala llena</b><span>150 mujeres con la misma pregunta</span></div>
-      </div>
-      <div class="tcell">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 15h6"/></svg>
-        <div><b>Salís con una decisión</b><span>La que venís postergando, con fecha</span></div>
-      </div>
-      <div class="tcell">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.9M16 3.1a4 4 0 010 7.8"/></svg>
-        <div><b>No termina el 17</b><span>Tres meses de acompañamiento después</span></div>
-      </div>
-      <div class="tcell">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-        <div><b>Todo dicho de antemano</b><span>Precio, lugar, agenda y qué no vas a encontrar</span></div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ============ PUNTO DE ENTRADA ============ -->
 <section class="sec" id="reservar">
@@ -767,31 +756,14 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
     </div>
 
     <div class="entry rv">
-      <div class="entry-body">
-        <h3>Estás Para Más</h3>
-        <div class="eyebrow" style="margin-bottom:0">Edición Buenos Aires · 17 de agosto de 2026</div>
-
-        <div class="entry-for">
-          <b>Para quién es</b>
-          Para la mujer que tiene el trabajo, el departamento y las amigas, y una sensación
-          adentro que no sabe cómo nombrar. No hace falta que estés en crisis.
-          Alcanza con que estés cansada de que esté todo bien.
+      <div class="entry-body" style="padding: 0; background: #000; display: flex; align-items: center; justify-content: center; min-height: 400px; border-radius: var(--r) 0 0 var(--r);">
+        <div style="color: #fff; font-family: var(--mono); letter-spacing: 2px; text-transform: uppercase;">
+            [ Espacio para el VSL ]
         </div>
-
-        <ul class="incl">
-          <li><span class="chk">✓</span><div><b>Un diagnóstico honesto de en qué punto estás</b><em>Con qué te venís conformando y desde cuándo</em></div></li>
-          <li><span class="chk">✓</span><div><b>El mapa de lo que ya no vas a seguir aceptando</b><em>Escrito por vos, no dictado por nadie</em></div></li>
-          <li><span class="chk">✓</span><div><b>Esa decisión que venís postergando, tomada</b><em>Una sola. La que destraba el resto</em></div></li>
-          <li><span class="chk">✓</span><div><b>Un grupo de mujeres que entienden sin que expliques</b><em>Y que siguen escribiéndose después</em></div></li>
-        </ul>
-
-        <p class="logi">
-          Incluye además jornada completa presencial de 9:00 a 20:00, materiales de trabajo,
-          break con comida incluida y espacio de networking.
-        </p>
       </div>
 
-      <div class="entry-buy">
+      <div class="entry-buy" style="border-left: none; border-top: 1px solid var(--linea);">
+
         <div class="pricejump">
           <span class="pj-now">Hasta el 10 de agosto</span>
           <span class="pj-then">Después: $65.000</span>
@@ -826,41 +798,22 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
       <p class="lead">De 9 a 20. Once horas es mucho tiempo: tenés derecho a saber en qué las vas a invertir.</p>
     </div>
 
-    <div class="agenda rv">
-      <div class="slot">
-        <div class="slot-h">01</div>
-        <div><h3>Llegada</h3><p>Quién es cada una y por qué está acá. Antes de empezar a trabajar, la sala tiene que saber con quién está.</p></div>
-      </div>
-      <div class="slot">
-        <div class="slot-h">02</div>
-        <div><h3>La mentalidad</h3><p>Qué cabeza hace falta para construir una vida que te transforme. Sin esto, todo lo que viene después no se sostiene.</p></div>
-      </div>
-      <div class="slot">
-        <div class="slot-h">03</div>
-        <div><h3>Hacerte cargo</h3><p>El espacio para mirar de frente lo que no funciona y responsabilizarte de transformarlo. Es la parte incómoda del día.</p></div>
-      </div>
-      <div class="slot">
-        <div class="slot-h">04</div>
-        <div><h3>Break y networking</h3><p>Con comida incluida. Acá es donde suele pasar algo que no está en la agenda.</p></div>
-      </div>
-      <div class="slot">
-        <div class="slot-h">05</div>
-        <div><h3>Ponencia invitada</h3><p>Una invitada trabajando sobre el entorno: con quién te rodeás y cuánto de tu vida lo decide eso.</p></div>
-      </div>
-      <div class="slot">
-        <div class="slot-h">06</div>
-        <div><h3>Dinámicas</h3><p>De alto impacto, vinculando mente, cuerpo y emoción. No se anticipan: funcionan porque no sabés lo que viene.</p></div>
-      </div>
-      <div class="slot">
-        <div class="slot-h">07</div>
-        <div><h3>Cierre</h3><p>Con qué te vas y qué hacés el martes, cuando el entusiasmo se apaga. Esta es la parte que casi ningún evento te da.</p></div>
+    
+    <div class="agenda rv" style="padding: 40px 0; text-align: center;">
+      <div style="max-width: 600px; margin: 0 auto 40px;">
+        <h3 style="font-size: 1.5rem; margin-bottom: 20px;">¿Que pasa ese día?</h3>
+        <p class="lead" style="margin-bottom: 40px;">Esto se vuelve tu estado natural.</p>
+        <div style="background: var(--berenjena-alt); padding: 40px; border-radius: var(--r); border: 1px dashed var(--bronce);">
+            [ Espacio para testimonios hablados de las chicas ]
+        </div>
       </div>
     </div>
-
     <figure class="agenda-shot rv">
-      <img src="assets/img/agenda-valentina.jpg" alt="Valentina durante una edición anterior del evento" loading="lazy">
-      <figcaption>Edición anterior · Córdoba</figcaption>
+      <div style="width:100%; height:420px; background:#ddd; display:flex; align-items:center; justify-content:center; color:var(--gris); font-family:var(--mono); text-transform:uppercase; letter-spacing:2px;">
+        [ Imagen de Line Up / Ponentes ]
+      </div>
     </figure>
+
   </div>
 </section>
 
@@ -869,350 +822,14 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
   <div class="wrap">
     <div class="sec-head rv" style="max-width:720px">
       <div class="eyebrow">Nuestra historia</div>
-      <h2>Nadie se salva de una vida que está bien.</h2>
+      <h2>Nuestra historia</h2>
     </div>
 
     <div class="story-grid">
-      <div class="story-photo rv" style="background-image:url('assets/img/historia-valentina.jpg')"><span class="story-cap">Edición anterior · Córdoba</span></div>
+      <div class="story-photo rv" style="background-image:url('assets/img/historia-valentina.jpg')"></div>
       <div class="story-body rv">
-        <p>
-          Todo lo que existe en el mercado le habla a la mujer que se rompió. La que se separó,
-          la que perdió el trabajo, la que tocó fondo. Hay cursos, terapias, retiros y libros
-          esperándola del otro lado de la crisis.
-        </p>
-        <p>
-          <strong>Pero hay otra mujer a la que nadie le habla: la que no tiene ninguna excusa
-          válida para sentirse así.</strong> La que tiene trabajo, obra social, pareja, amigas
-          y un departamento decente. La que si dice en voz alta que no está del todo bien,
-          queda como una malagradecida.
-        </p>
-        <p>
-          Esa mujer no tiene lenguaje y no tiene permiso. La terapia le pregunta qué le duele
-          y no sabe qué contestar. La motivación le dice que agradezca lo que tiene. Sus amigas
-          le dicen que está exagerando. Entonces se calla, guarda otro reel y espera que se
-          le pase.
-        </p>
-
-        <div class="pull">
-          “También tuve una vida correcta: estable, aprobada por todos, suficiente desde afuera.
-          Hasta que me hice la pregunta que venía evitando.”
-        </div>
-
-        <p>
-          Estás Para Más nace de ahí. No de una teoría ni de una certificación, sino de haber
-          estado exactamente en ese lugar y haber tardado años en darme cuenta de que un 7
-          nunca se convierte solo en un 10.
-        </p>
-        <p>
-          <strong>Mi trabajo no es que me sigas. Es que aprendas a confiar en vos misma.</strong>
-          Por eso esto no es un evento de motivación: es un día incómodo con una decisión
-          que venís postergando.
-        </p>
-
-        <div class="story-facts">
-          <div class="sfact"><b>2024</b><span>Año desde el que<br>me dedico a esto</span></div>
-          <div class="sfact"><b>+150</b><span>Vidas<br>transformadas</span></div>
-          <div class="sfact"><b>1ª</b><span>Edición presencial<br>en Buenos Aires</span></div>
-        </div>
-        <p style="margin-top:14px;font-family:var(--mono);font-size:.72rem;color:#7E6C7A;line-height:1.6">
-          ⚠ Revisar: el número de edición está puesto como 1ª porque la anterior fue en Córdoba.
-          Confirmar con Valentina si es la primera de Buenos Aires o qué número corresponde.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ EL CAMINO / COMPARADOR ============ -->
-<section class="sec" id="camino">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div class="eyebrow">El camino completo</div>
-      <h2>El 17 no es el final. Es el primer escalón.</h2>
-      <p class="lead">
-        La mayoría de los eventos te dejan motivada un martes y sola el miércoles.
-        Acá el día es la entrada a algo que sigue. Estos son los tres escalones,
-        y podés quedarte en el primero.
-      </p>
-    </div>
-
-    <div class="ladder rv">
-      <div class="rung now">
-        <div class="rung-step">Escalón 1 · Entrada</div>
-        <h3>Estás Para Más</h3>
-        <div class="rung-price">$45.000 ARS</div>
-        <div class="rung-dur">Un día · sube a $65.000 el 10/08</div>
-        <p class="rung-who">
-          Para la que <b>todavía no sabe qué quiere</b>, solo que así no.
-          Si nunca hiciste nada parecido, empezás por acá.
-        </p>
-        <ul>
-          <li>Diagnóstico de tu punto de partida</li>
-          <li>Una decisión que venís postergando, tomada</li>
-          <li>150 mujeres en la misma sala</li>
-          <li>Materiales impresos y almuerzo</li>
-        </ul>
-        <p class="rung-note">Conviene si querés probar la metodología antes de comprometerte con un proceso largo.</p>
-      </div>
-
-      <div class="rung">
-        <div class="rung-step">Escalón 2 · Sostener</div>
-        <h3>Transformarte</h3>
-        <div class="rung-price">USD 300</div>
-        <div class="rung-dur">3 meses · 24 encuentros</div>
-        <p class="rung-who">
-          Para la que <b>ya sabe qué decidió</b> y necesita no quedarse sola en el intento.
-          Es el escalón que evita que se apague a los diez días.
-        </p>
-        <ul>
-          <li>Programa grabado completo</li>
-          <li>24 encuentros grupales en vivo</li>
-          <li>Comunidad activa entre encuentros</li>
-          <li>Seguimiento de tu decisión</li>
-        </ul>
-        <p class="rung-note">Conviene si tu historial es entusiasmarte y abandonar. Acá el entorno hace el trabajo que la fuerza de voluntad no hace.</p>
-      </div>
-
-      <div class="rung">
-        <div class="rung-step">Escalón 3 · Acelerar</div>
-        <h3>Claridad Definitiva</h3>
-        <div class="rung-price" style="font-size:1.15rem;line-height:1.35">Requiere entrevista previa</div>
-        <div class="rung-dur">6 meses · 1:1 + grupal</div>
-        <p class="rung-who">
-          Para la que <b>ya tomó la decisión grande</b> y está construyendo algo concreto
-          que necesita otro nivel de acompañamiento.
-        </p>
-        <ul>
-          <li>Sesiones individuales durante 6 meses</li>
-          <li>Acompañamiento 1:1 y también grupal</li>
-          <li>Programa grabado completo</li>
-          <li>Roadmap personalizado</li>
-        </ul>
-        <p class="rung-note">No se compra: se postula. Hay una llamada de consultoría previa para ver si es tu momento, y no entran todas.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ TESTIMONIOS ============ -->
-<section class="sec" id="historias" style="background:var(--arena);border-top:1px solid var(--linea)">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div class="eyebrow">Historias</div>
-      <h2>Mujeres que decidieron.</h2>
-      <p class="lead">
-        Ninguna sabía bien qué venía a buscar. Todas se fueron sabiéndolo.
-        Esto es lo que hicieron después.
-      </p>
-    </div>
-
-    <div class="score-head rv">
-      <div>
-        <div class="score-num">4,9<sub>/5</sub></div>
-      </div>
-      <div>
-        <div class="stars">★★★★★</div>
-        <p class="score-meta">
-          Basado en <b>[X] respuestas</b> de asistentes de las ediciones anteriores.<br>
-          <b>[X]%</b> volvería a hacerlo · <b>[X]%</b> continuó en Transformarte.
-        </p>
-      </div>
-    </div>
-
-    <div class="quotes rv">
-      <div class="quote">
-        <span class="q-result">Renunció a las 3 semanas</span>
-        <p class="q-text">
-          “Me escribió a las once de la noche: acabo de dar el preaviso para seguir mi sueño.
-          No se lo dije yo. Por fin se lo dijo ella.”
-        </p>
-        <div class="q-who">
-          <div class="q-av">R</div>
-          <div><b>[Nombre real]</b><span>[Edad] · [Ciudad]</span></div>
-        </div>
-      </div>
-
-      <div class="quote">
-        <span class="q-result">Cerró su primera clienta</span>
-        <p class="q-text">
-          “Tengo una persona que me pide sesiones de coaching y estoy cerrando con ella.
-          Hace dos años que decía que algún día iba a empezar.”
-        </p>
-        <div class="q-who">
-          <div class="q-av">M</div>
-          <div><b>[Nombre real]</b><span>[Edad] · [Ciudad]</span></div>
-        </div>
-      </div>
-
-      <div class="quote">
-        <span class="q-result">Le daba miedo el precio</span>
-        <p class="q-text">
-          “Lo pagué en seis cuotas y estuve un mes pensando si estaba haciendo una locura.
-          Salí con una decisión tomada. La cumplí en noviembre.”
-        </p>
-        <div class="q-who">
-          <div class="q-av">E</div>
-          <div><b>[Nombre real]</b><span>[Edad] · [Ciudad]</span></div>
-        </div>
-      </div>
-    </div>
-
-    <p class="ph-note rv">
-      ⚠ MOCKUP · Los tres testimonios están redactados a partir de las capturas de WhatsApp
-      que ya están en el sitio actual, pero los nombres, edades, ciudades y el score son
-      placeholders. Antes de publicar: conseguir autorización escrita de cada mujer y
-      reemplazar por datos reales. El brief marca el tercer testimonio (miedo al precio)
-      como prioritario: es el único que ataca la objeción #1 declarada por la marca.
-    </p>
-  </div>
-</section>
-
-<!-- ============ OBJECIONES ============ -->
-<section class="sec" id="dudas">
-  <div class="wrap">
-    <div class="sec-head rv" style="max-width:720px">
-      <div class="eyebrow">Antes de decidir</div>
-      <h2>Lo que probablemente estés pensando.</h2>
-    </div>
-
-    <div class="faq narrow rv" style="padding:0">
-      <details class="fq">
-        <summary>Ya probé otras cosas y no me funcionaron. ¿Por qué esto sí?</summary>
-        <div class="fq-a">
-          Te lo digo derecho: si venís a escuchar, no vengas. Lo que suele fallar en un curso
-          o un taller es que todo pasa de la cabeza para arriba: salís con ideas y ninguna
-          decisión. Acá trabajamos con <strong>dinámicas de alto impacto que vinculan mente,
-          cuerpo y emoción</strong>, que es lo que hace que algo se mueva de verdad y no se
-          quede en un apunte. El estándar es simple: si te vas igual que como entraste,
-          no funcionó.
-        </div>
-      </details>
-      <details class="fq">
-        <summary>¿Esto reemplaza la terapia?</summary>
-        <div class="fq-a">
-          No, y no quiero que lo haga. La terapia procesa lo que te pasó; este día define
-          lo que vas a hacer. Muchas de las que vienen están en terapia y siguen después.
-          <strong>Si estás atravesando una crisis de salud mental, esto no es lo que necesitás
-          ahora</strong> y te lo voy a decir así de claro si me escribís por WhatsApp.
-        </div>
-      </details>
-      <details class="fq">
-        <summary>Voy a ir sola y no conozco a nadie.</summary>
-        <div class="fq-a">
-          Casi todas vienen solas: es la norma, no la excepción. Somos 150, pero el día está
-          armado para que trabajes en grupos chicos, así que para el break ya conocés gente.
-          Y no hay ningún momento en el que tengas que pararte a hablar delante de la sala
-          si no querés.
-        </div>
-      </details>
-      <details class="fq">
-        <summary>No sé bien qué quiero. ¿Vengo igual?</summary>
-        <div class="fq-a">
-          Esa es la condición de entrada, no un problema. Si ya supieras qué querés, no
-          necesitarías el día. La mayoría llega sabiendo perfectamente qué <em>no</em> quiere
-          y sin ninguna claridad sobre lo demás.
-        </div>
-      </details>
-      <details class="fq">
-        <summary>¿Qué pasa el día después?</summary>
-        <div class="fq-a">
-          Es la pregunta correcta y la que casi ningún evento responde. Te llevás la decisión
-          tomada y el contacto del grupo. Si querés que alguien te sostenga los meses
-          siguientes, ahí entra Transformarte: tres meses, veinticuatro encuentros. Pero no es
-          obligatorio y no te lo voy a vender ese día.
-        </div>
-      </details>
-      <details class="fq">
-        <summary>¿Puedo pagar en cuotas? ¿Hay devolución?</summary>
-        <div class="fq-a">
-          Sí, en cuotas con Mercado Pago. Si pagás por transferencia o en dólares, es en un
-          solo pago. Te aviso algo igual: <strong>el 10 de agosto la entrada pasa de $45.000
-          a $65.000</strong>. No es una técnica de venta, es el precio que va a tener a partir
-          de esa fecha. Sobre devoluciones prefiero decírtelo acá y no en la letra chica:
-          <strong>no se devuelve el dinero, pero sí podés transferirle tu entrada a otra
-          persona</strong> si al final no podés venir. Si tenés dudas, escribime por WhatsApp
-          antes de pagar y lo hablamos.
-        </div>
-      </details>
-      <details class="fq">
-        <summary>¿Dónde es exactamente?</summary>
-        <div class="fq-a">
-          Salón privado en Capital Federal, Buenos Aires. La dirección exacta se envía al
-          confirmar la inscripción, por una cuestión de privacidad del grupo.
-        </div>
-      </details>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CAPTURA DE LEADS ============ -->
-<section class="sec lead-sec">
-  <div class="wrap">
-    <div class="lead-grid">
-      <div class="rv">
-        <div class="eyebrow">Todavía no estás lista para decidir</div>
-        <h2 style="margin-bottom:18px">Entonces empezá por acá.</h2>
-        <p class="lead">
-          Si el precio te frena o simplemente no es el momento, no te vayas con las manos
-          vacías. Dejame tu mail y te mando tres cosas para empezar sola.
-        </p>
-
-        <figure class="gift-shot gift-ph">
-          <div>
-            <b>Foto del journal</b>
-            <span>⚠ Pendiente: Valentina tiene que pasar una foto del journal.<br>La imagen que había acá estaba corrupta en el archivo.</span>
-          </div>
-        </figure>
-        <div class="gift">
-          <div class="gift-row">
-            <div class="gift-n">1</div>
-            <div>
-              <b>El journal de Estás Para Más</b>
-              <span>El cuaderno de trabajo que ya usan las mujeres del ecosistema, en PDF imprimible.</span>
-            </div>
-          </div>
-          <div class="gift-row">
-            <div class="gift-n">2</div>
-            <div>
-              <b>[Regalo 2 — a completar por Valentina]</b>
-              <span>⚠ Placeholder. Valentina define cuál es el segundo recurso propio que quiere entregar acá.</span>
-            </div>
-          </div>
-          <div class="gift-row">
-            <div class="gift-n">3</div>
-            <div>
-              <b>[Regalo 3 — a completar por Valentina]</b>
-              <span>⚠ Placeholder. Valentina define cuál es el tercer recurso. Sin descuentos: el beneficio tiene que ser contenido, no precio.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="rv">
-        <div class="form-card">
-          <form id="leadForm">
-            <h3>Mandámelos</h3>
-            <p>Escribo cada dos semanas. Si no te sirve, te vas con un clic.</p>
-            <div class="field">
-              <label for="nom">Cómo te llamás</label>
-              <input type="text" id="nom" name="nom" placeholder="Tu nombre" required>
-            </div>
-            <div class="field">
-              <label for="mail">Tu email</label>
-              <input type="email" id="mail" name="mail" placeholder="vos@email.com" required>
-            </div>
-            <button type="submit" class="btn btn-dark btn-block" style="margin-top:8px">
-              Quiero los tres regalos <span class="arw">→</span>
-            </button>
-            <p class="form-note">Sin spam y sin venderte nada en el primer mail. Te podés dar de baja cuando quieras.</p>
-          </form>
-          <div class="form-ok" id="formOk">
-            <b>Listo, [nombre].</b>
-            Te llegan a tu casilla en un minuto. Revisá promociones por las dudas.
-            <span style="display:block;margin-top:10px;font-family:var(--mono);font-size:.7rem;color:var(--gris)">
-              ⚠ Mockup sin backend: no se envía nada.
-            </span>
-          </div>
+        <div class="pull" style="margin-top: 0;">
+          “Mi trabajo no es que me sigas, es que aprendas a confiar en vos misma y construyas tu vida 10/10.”
         </div>
       </div>
     </div>
@@ -1250,56 +867,23 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
 <!-- ============ FOOTER ============ -->
 <footer class="foot">
   <div class="wrap">
-    <div class="foot-grid">
-      <div class="foot-brand">
+    <div class="foot-grid" style="grid-template-columns: 1fr; text-align: center; justify-items: center;">
+      <div class="foot-brand" style="display: flex; flex-direction: column; align-items: center;">
         <span class="logo">ESTÁS PARA MÁS</span>
-        <p>
+        <p style="max-width: 400px; margin: 0 auto; text-align: center;">
           Una experiencia de expansión de identidad para mujeres que saben
           que su vida puede ser más grande.
         </p>
-        <div class="socials">
+        <div class="socials" style="justify-content: center;">
           <a href="#" class="soc" aria-label="Instagram">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
           </a>
           <a href="#" class="soc" aria-label="WhatsApp">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M21 11.5a8.4 8.4 0 01-12.6 7.3L3 21l2.3-5.3A8.4 8.4 0 1121 11.5z"/></svg>
           </a>
-          <a href="#" class="soc" aria-label="YouTube">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z"/></svg>
-          </a>
         </div>
       </div>
-
-      <div>
-        <h4>El evento</h4>
-        <ul>
-          <li><a href="#el-dia">Qué pasa ese día</a></li>
-          <li><a href="#reservar">Precio e inscripción</a></li>
-          <li><a href="#dudas">Preguntas frecuentes</a></li>
-          <li><a href="#historias">Historias reales</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4>El camino</h4>
-        <ul>
-          <li><a href="#camino">Transformarte</a></li>
-          <li><a href="#camino">Claridad Definitiva</a></li>
-          <li><a href="#historia">Quién es Valentina</a></li>
-          <li><a href="#">Comunidad</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4>Contacto</h4>
-        <ul class="foot-contact">
-          <li>WhatsApp directo<br><a href="#">+54 9 11 ···· ····</a></li>
-          <li>hola@estasparamas.com</li>
-          <li>Salón privado<br>Capital Federal, Buenos Aires</li>
-        </ul>
-      </div>
     </div>
-
     <div class="foot-bot">
       <div>© 2026 Estás Para Más · Términos · Privacidad</div>
       <span>Hay una forma de vivir que todavía no conocés.</span>
@@ -1317,31 +901,40 @@ addEventListener('scroll',()=>{
   });tick=true;}
 },{passive:true});
 
-/* firma: medidor 1-10 */
-const scale=document.getElementById('scale'),out=document.getElementById('out');
-const msg={
-  1:['Eso no es un 7.','Si tu vida está en un 1, lo que necesitás hoy es ayuda profesional, no un evento. Escribinos igual y te oriento hacia dónde ir.'],
-  2:['Eso no es un 7.','Si tu vida está en un 2, lo que necesitás hoy es ayuda profesional, no un evento. Escribinos igual y te oriento hacia dónde ir.'],
-  3:['Un 3 duele y se nota.','Al menos tenés eso a favor: un 3 te empuja. Igual, si estás atravesando algo serio, empezá por un profesional.'],
-  4:['Un 4 te obliga a moverte.','Y eso es una ventaja. El problema real no es el 4: es el 7.'],
-  5:['La mitad exacta.','Ni tan mal como para explotar, ni tan bien como para quedarte tranquila. El limbo más largo.'],
-  6:['Casi el 7.','Un 6 es un 7 al que todavía le queda algo de incomodidad útil. Aprovechala antes de que se acomode.'],
-  7:['Ahí está.','El 7 es el peor número que te puede tocar. No está mal, y por eso no hacés nada. Y así se te van los años esperando que un 7 se convierta solo en un 10.'],
-  8:['Un 8 muy declarado.','Casi nadie que pone 8 lo sostiene diez segundos. Volvé a mirar el número y contestá otra vez.'],
-  9:['¿Un 9, en serio?','Si es cierto, felicitaciones honestas. Si lo pusiste para no mirar el número real, ya sabés cuál era.'],
-  10:['Nadie tiene un 10.','Y quien lo pone es porque no quiere abrir la pregunta. No pasa nada: la abrís cuando quieras.']
-};
-for(let i=1;i<=10;i++){
-  const b=document.createElement('button');
-  b.className='notch'+(i===7?' seven':'');
-  b.textContent=i;b.type='button';
-  b.setAttribute('aria-label','Puntuar mi vida con '+i);
-  b.onclick=()=>{
-    document.querySelectorAll('.notch').forEach(n=>n.classList.remove('on'));
-    b.classList.add('on');
-    out.innerHTML='<strong>'+msg[i][0]+'</strong>'+msg[i][1];
-  };
-  scale.appendChild(b);
+/* Formulario 3 pasos */
+let formState = { area: '', number: 0, res: '' };
+function nextStep(step, val) {
+    if(step === 1) {
+        formState.area = val;
+        document.getElementById('step-1').style.display = 'none';
+        document.getElementById('step-2').style.display = 'block';
+    } else if(step === 2) {
+        formState.number = val;
+        document.getElementById('step-2').style.display = 'none';
+        document.getElementById('step-3').style.display = 'block';
+    } else if(step === 3) {
+        formState.res = val;
+        document.getElementById('step-3').style.display = 'none';
+        const resEl = document.getElementById('step-result');
+        const out = document.getElementById('form-result');
+        resEl.style.display = 'block';
+        if(val === 'Si') {
+            out.innerHTML = '<div class="form-result-text">En <b>Estás para más</b> es el lugar donde tu vida va a dejar de ser un ' + formState.number + '/10 para ser un 10/10.<br><br>Siendo consciente que tu <b>' + formState.area + '</b> depende de vos!<br><br><strong>¡Qué poderosa por estar dispuesta a responsabilizarte!</strong></div>';
+        } else {
+            out.innerHTML = '<div class="form-result-text"><strong>Lo sentimos!</strong> Estás para más es un espacio donde se requiere compromiso para responsabilizarte de tu vida.</div>';
+        }
+    }
+}
+const scaleNew = document.getElementById('scale-new');
+if(scaleNew) {
+    for(let i=1;i<=10;i++){
+      const b = document.createElement('button');
+      b.className = 'notch' + (i===7?' seven':'');
+      b.textContent = i;
+      b.type = 'button';
+      b.onclick = () => nextStep(2, i);
+      scaleNew.appendChild(b);
+    }
 }
 
 /* contador al 17/08/2026 + salto de precio 10/08 */
@@ -1358,16 +951,6 @@ function tickCd(){
   if(pj) pj.textContent = dj>0 ? Math.floor(dj/864e5) : '0';
 }
 tickCd();setInterval(tickCd,30000);
-
-/* formulario mockup */
-document.getElementById('leadForm').addEventListener('submit',e=>{
-  e.preventDefault();
-  const n=document.getElementById('nom').value.trim()||'che';
-  const ok=document.getElementById('formOk');
-  ok.querySelector('b').textContent='Listo, '+n+'.';
-  e.target.style.display='none';
-  ok.style.display='block';
-});
 
 /* reveal on scroll */
 const io=new IntersectionObserver(es=>{

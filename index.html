@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estás Para Más — Una vida 7 no se arregla sola</title>
+<meta name="description" content="Una experiencia de expansión de identidad para mujeres que saben que su vida puede ser más grande. 17 de agosto de 2026, Buenos Aires.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ESTÁS PARA MÁS · Mockup de alta conversión
+   Sistema de diseño
+   ------------------------------------------------------------
+   Color   berenjena #33202F / tinta #1A1017 / arena #F2EDE4
+           papel #FAF7F1 / bronce #A87C4F / salvia #6E7F6A
+   Type    Fraunces (display, óptico variable) · DM Sans (cuerpo)
+           DM Mono (datos, numeración, etiquetas)
+   Firma   El medidor del 1 al 10 — el "7" es el elemento
+           memorable de toda la página, aparece como objeto
+           interactivo en el hero y como hilo conductor.
+   ============================================================ */
+
+:root{
+  --berenjena:#33202F;
+  --berenjena-alt:#28182410;
+  --tinta:#1A1017;
+  --arena:#F2EDE4;
+  --papel:#FAF7F1;
+  --bronce:#A87C4F;
+  --bronce-claro:#C9A277;
+  --salvia:#6E7F6A;
+  --gris:#6E6169;
+  --linea:#E2D9CC;
+  --linea-dark:#4A3646;
+
+  --display:'Fraunces',Georgia,serif;
+  --body:'DM Sans',system-ui,sans-serif;
+  --mono:'DM Mono',ui-monospace,monospace;
+
+  --max:1180px;
+  --r:2px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--body);
+  background:var(--papel);
+  color:var(--tinta);
+  font-size:17px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:none;background:none}
+
+.wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+.narrow{max-width:800px;margin:0 auto;padding:0 28px}
+
+/* — tipografía — */
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.08;letter-spacing:-.02em}
+h1{font-size:clamp(2.9rem,7.2vw,5.4rem);font-variation-settings:'opsz' 144}
+h2{font-size:clamp(2rem,4.4vw,3.2rem);font-variation-settings:'opsz' 96}
+h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
+
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--bronce);
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:22px;
+}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--bronce);flex:none}
+.eyebrow.center{justify-content:center}
+.eyebrow.center::after{content:"";width:34px;height:1px;background:var(--bronce)}
+
+.lead{font-size:1.14rem;color:var(--gris);line-height:1.68}
+.dark .lead{color:#C4B5C0}
+
+/* — botones — */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:11px;
+  padding:17px 32px;font-size:.94rem;font-weight:500;letter-spacing:.01em;
+  border-radius:var(--r);transition:.28s cubic-bezier(.2,.7,.3,1);
+  text-align:center;
+}
+.btn-primary{background:var(--bronce);color:#fff}
+.btn-primary:hover{background:#96693D;transform:translateY(-2px);box-shadow:0 12px 28px rgba(168,124,79,.32)}
+.btn-dark{background:var(--berenjena);color:#fff}
+.btn-dark:hover{background:var(--tinta);transform:translateY(-2px);box-shadow:0 12px 28px rgba(51,32,47,.28)}
+.btn-ghost{border:1px solid rgba(255,255,255,.32);color:#fff}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.btn-outline{border:1px solid var(--linea);color:var(--tinta);background:#fff}
+.btn-outline:hover{border-color:var(--berenjena);background:var(--arena)}
+.btn-block{width:100%}
+.btn .arw{transition:transform .28s}
+.btn:hover .arw{transform:translateX(4px)}
+
+/* ============ NAVBAR ============ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:22px 0;transition:.34s ease;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(250,247,241,.93);
+  backdrop-filter:blur(14px);
+  padding:13px 0;
+  border-bottom-color:var(--linea);
+  box-shadow:0 1px 24px rgba(26,16,23,.05);
+}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{
+  font-family:var(--display);font-size:1.02rem;letter-spacing:.17em;
+  color:#fff;transition:color .34s;white-space:nowrap;
+}
+.nav.scrolled .logo{color:var(--berenjena)}
+.nav-links{display:flex;gap:30px;font-size:.86rem;letter-spacing:.02em}
+.nav-links a{color:rgba(255,255,255,.82);transition:.24s;position:relative;padding:3px 0}
+.nav-links a::after{
+  content:"";position:absolute;bottom:0;left:0;width:0;height:1px;
+  background:var(--bronce-claro);transition:width .28s;
+}
+.nav-links a:hover::after{width:100%}
+.nav.scrolled .nav-links a{color:var(--gris)}
+.nav.scrolled .nav-links a:hover{color:var(--berenjena)}
+.nav-cta{
+  padding:11px 22px;font-size:.85rem;font-weight:500;border-radius:var(--r);
+  background:rgba(255,255,255,.13);color:#fff;
+  border:1px solid rgba(255,255,255,.3);transition:.28s;white-space:nowrap;
+}
+.nav-cta:hover{background:#fff;color:var(--berenjena)}
+.nav.scrolled .nav-cta{background:var(--bronce);border-color:var(--bronce);color:#fff}
+.nav.scrolled .nav-cta:hover{background:#96693D}
+
+/* ============ HERO ============ */
+.hero{
+  background:var(--berenjena);color:#fff;
+  padding:186px 0 0;position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;background-size:cover;background-position:center 38%;
+  opacity:.30;filter:grayscale(.25);
+}
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(105deg,var(--berenjena) 32%,rgba(51,32,47,.90) 52%,rgba(51,32,47,.62) 100%),
+    radial-gradient(ellipse 900px 620px at 78% 8%,rgba(168,124,79,.22),transparent 62%);
+  pointer-events:none;
+}
+.hero-grid{
+  display:grid;grid-template-columns:1.08fr .92fr;gap:70px;align-items:center;
+  position:relative;z-index:2;
+}
+.hero h1{margin-bottom:28px}
+.hero h1 em{font-style:italic;color:var(--bronce-claro);font-weight:300}
+.hero-sub{font-size:1.17rem;color:#CBBCC7;max-width:490px;line-height:1.66;margin-bottom:14px}
+.hero-sub strong{color:#fff;font-weight:500}
+.hero-story{
+  border-left:2px solid var(--bronce);padding-left:20px;margin:30px 0 34px;
+  font-size:1.02rem;color:#BFAEBB;line-height:1.62;max-width:470px;
+}
+.hero-story b{color:#fff;font-weight:400;font-style:italic;font-family:var(--display)}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.hero-micro{
+  font-family:var(--mono);font-size:.74rem;color:#9C8A98;
+  letter-spacing:.04em;display:flex;align-items:center;gap:9px;
+}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--salvia);flex:none;
+  box-shadow:0 0 0 0 rgba(110,127,106,.7);animation:pulse 2.6s infinite}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(110,127,106,.6)}
+  70%{box-shadow:0 0 0 9px rgba(110,127,106,0)}
+  100%{box-shadow:0 0 0 0 rgba(110,127,106,0)}
+}
+
+/* — FIRMA: el medidor del 1 al 10 — */
+.meter{
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.11);
+  padding:34px 32px 30px;border-radius:var(--r);
+  backdrop-filter:blur(6px);
+}
+.meter-q{
+  font-family:var(--display);font-size:1.42rem;line-height:1.3;
+  margin-bottom:6px;font-variation-settings:'opsz' 48;
+}
+.meter-hint{font-size:.85rem;color:#9C8A98;margin-bottom:26px}
+.scale{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;margin-bottom:9px}
+.notch{
+  aspect-ratio:1/2.4;border:1px solid rgba(255,255,255,.17);
+  background:rgba(255,255,255,.03);border-radius:1px;
+  display:flex;align-items:flex-end;justify-content:center;
+  padding-bottom:7px;font-family:var(--mono);font-size:.68rem;
+  color:#8E7C8A;cursor:pointer;transition:.22s;
+}
+.notch:hover{background:rgba(168,124,79,.28);border-color:var(--bronce);color:#fff;transform:translateY(-3px)}
+.notch.on{background:var(--bronce);border-color:var(--bronce);color:#fff}
+.notch.seven{border-color:var(--bronce-claro);border-width:1.5px}
+.scale-lbl{
+  display:flex;justify-content:space-between;font-family:var(--mono);
+  font-size:.66rem;color:#7E6C7A;letter-spacing:.09em;text-transform:uppercase;
+}
+.meter-out{
+  margin-top:22px;padding-top:20px;border-top:1px solid rgba(255,255,255,.11);
+  font-size:.95rem;color:#C4B5C0;line-height:1.55;min-height:74px;
+}
+.meter-out strong{color:#fff;font-weight:500;display:block;margin-bottom:4px;font-family:var(--display);font-size:1.06rem}
+
+/* — stats de confianza del hero — */
+.hero-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:rgba(255,255,255,.1);margin-top:78px;
+  border-top:1px solid rgba(255,255,255,.1);position:relative;z-index:2;
+}
+.hstat{background:var(--berenjena);padding:30px 22px 34px;text-align:center}
+.hstat b{
+  display:block;font-family:var(--display);font-size:2.1rem;
+  color:#fff;line-height:1;margin-bottom:8px;font-variation-settings:'opsz' 72;
+}
+.hstat span{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.13em;
+  text-transform:uppercase;color:#9C8A98;line-height:1.5;display:block;
+}
+
+/* ============ TRUST BAR ============ */
+.trust{background:var(--arena);border-bottom:1px solid var(--linea);padding:0}
+.trust-grid{display:grid;grid-template-columns:repeat(5,1fr)}
+.tcell{
+  padding:30px 24px;border-right:1px solid var(--linea);
+  display:flex;gap:14px;align-items:flex-start;
+}
+.tcell:last-child{border-right:none}
+.tcell svg{flex:none;margin-top:2px;stroke:var(--bronce)}
+.tcell b{display:block;font-size:.9rem;font-weight:600;margin-bottom:3px;letter-spacing:-.01em}
+.tcell span{font-size:.79rem;color:var(--gris);line-height:1.48;display:block}
+
+/* ============ SECCIONES ============ */
+.sec{padding:104px 0}
+.sec.tight{padding:78px 0}
+.dark{background:var(--berenjena);color:#fff}
+.dark h2,.dark h3{color:#fff}
+.sec-head{margin-bottom:52px;max-width:660px}
+.sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+.sec-head h2{margin-bottom:18px}
+
+/* ============ PRODUCTOS ============ */
+.entry-flag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--salvia);
+  border:1px solid var(--salvia);padding:5px 12px;border-radius:var(--r);
+  margin-bottom:18px;
+}
+
+/* tarjeta destacada: punto de entrada */
+.entry{
+  display:grid;grid-template-columns:1.15fr .85fr;
+  background:#fff;border:1px solid var(--linea);border-radius:var(--r);
+  overflow:hidden;transition:.32s;
+}
+.entry:hover{box-shadow:0 22px 60px rgba(26,16,23,.10);transform:translateY(-3px)}
+.entry-body{padding:46px 46px 40px}
+.entry-body h3{font-size:2.05rem;margin-bottom:8px;font-variation-settings:'opsz' 72}
+.entry-for{
+  background:var(--arena);border-left:2px solid var(--bronce);
+  padding:15px 18px;margin:22px 0 26px;font-size:.92rem;line-height:1.58;
+}
+.entry-for b{font-weight:600;display:block;margin-bottom:3px;font-size:.82rem;
+  letter-spacing:.06em;text-transform:uppercase;font-family:var(--mono);color:var(--bronce)}
+.incl{list-style:none;margin-bottom:28px}
+.incl li{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:11px 0;border-bottom:1px solid var(--linea);font-size:.95rem;line-height:1.5;
+}
+.incl li:last-child{border-bottom:none}
+.incl .chk{
+  flex:none;width:18px;height:18px;border-radius:50%;background:var(--berenjena);
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:.6rem;margin-top:3px;
+}
+.incl li em{font-style:normal;color:var(--gris);font-size:.86rem;display:block;margin-top:2px}
+.logi{font-size:.82rem;color:var(--gris);padding-top:4px}
+
+.entry-buy{
+  background:var(--arena);padding:46px 40px;
+  display:flex;flex-direction:column;justify-content:center;
+  border-left:1px solid var(--linea);
+}
+.pricejump{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  background:var(--berenjena);color:#fff;padding:9px 14px;
+  border-radius:var(--r);margin-bottom:16px;flex-wrap:wrap;
+}
+.pj-now{font-family:var(--mono);font-size:.7rem;letter-spacing:.11em;text-transform:uppercase;color:var(--bronce-claro)}
+.pj-then{font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;color:#C4B5C0}
+.cd-hi b{color:var(--bronce-claro)}
+.price-row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.price{font-family:var(--display);font-size:2.9rem;line-height:1;font-variation-settings:'opsz' 96}
+.price-alt{
+  font-family:var(--mono);font-size:1.02rem;color:var(--berenjena);
+  background:#fff;border:1px solid var(--linea);padding:5px 11px;border-radius:var(--r);
+}
+.anchor{
+  font-size:.87rem;color:var(--gris);line-height:1.55;
+  padding:14px 0 20px;border-bottom:1px solid var(--linea);margin-bottom:20px;
+}
+.stock{margin-bottom:20px}
+.stock-bar{height:5px;background:#E0D6C7;border-radius:20px;overflow:hidden;margin-bottom:9px}
+.stock-fill{height:100%;width:73.3%;background:linear-gradient(90deg,var(--bronce),#C9945C);border-radius:20px}
+.stock-txt{font-family:var(--mono);font-size:.73rem;color:var(--gris);letter-spacing:.03em}
+.stock-txt b{color:var(--berenjena)}
+.pay{font-size:.78rem;color:var(--gris);text-align:center;margin-top:14px;line-height:1.5}
+
+/* ============ ESCALERA / COMPARADOR ============ */
+.ladder{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--linea);background:#fff}
+.rung{padding:38px 30px 34px;border-right:1px solid var(--linea);transition:.3s;position:relative}
+.rung:last-child{border-right:none}
+.rung:hover{background:var(--arena)}
+.rung.now{background:var(--arena)}
+.rung.now::before{
+  content:"ESTÁS ACÁ";position:absolute;top:0;left:0;right:0;
+  background:var(--berenjena);color:#fff;font-family:var(--mono);
+  font-size:.62rem;letter-spacing:.16em;text-align:center;padding:5px;
+}
+.rung.now{padding-top:52px}
+.rung-step{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;
+  color:var(--bronce);text-transform:uppercase;margin-bottom:12px;
+}
+.rung h3{margin-bottom:6px}
+.rung-price{
+  font-family:var(--display);font-size:1.62rem;margin:14px 0 4px;
+  font-variation-settings:'opsz' 48;
+}
+.rung-dur{font-family:var(--mono);font-size:.74rem;color:var(--gris);margin-bottom:18px;letter-spacing:.04em}
+.rung-who{
+  font-size:.87rem;color:var(--gris);line-height:1.55;
+  padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--linea);min-height:92px;
+}
+.rung-who b{color:var(--tinta);font-weight:600}
+.rung ul{list-style:none;font-size:.86rem;line-height:1.5}
+.rung ul li{padding:7px 0 7px 17px;position:relative;color:var(--gris)}
+.rung ul li::before{content:"—";position:absolute;left:0;color:var(--bronce)}
+.rung-note{
+  margin-top:20px;font-size:.8rem;color:var(--gris);font-style:italic;
+  padding-top:16px;border-top:1px solid var(--linea);
+}
+
+/* ============ HISTORIA ============ */
+.story-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:66px;align-items:start}
+.story-photo{
+  aspect-ratio:3/4;border-radius:var(--r);position:relative;overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  background-size:cover;background-position:center 22%;
+}
+.story-photo::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(36,22,32,.55),transparent 45%);
+}
+.story-cap{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;padding:20px 22px;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;
+  text-transform:uppercase;color:#D8CBD4;
+}
+.story-body p{margin-bottom:20px;color:#C4B5C0;line-height:1.72}
+.story-body p strong{color:#fff;font-weight:400}
+.pull{
+  font-family:var(--display);font-size:1.62rem;line-height:1.36;color:#fff;
+  border-left:2px solid var(--bronce);padding:4px 0 4px 24px;margin:32px 0;
+  font-style:italic;font-variation-settings:'opsz' 60;
+}
+.story-facts{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:rgba(255,255,255,.1);margin-top:38px;border:1px solid rgba(255,255,255,.1);
+}
+.sfact{background:var(--berenjena);padding:22px 18px}
+.sfact b{
+  display:block;font-family:var(--display);font-size:1.6rem;color:#fff;
+  margin-bottom:5px;font-variation-settings:'opsz' 48;
+}
+.sfact span{font-family:var(--mono);font-size:.66rem;letter-spacing:.11em;
+  text-transform:uppercase;color:#9C8A98;line-height:1.5;display:block}
+
+/* ============ AGENDA DEL DÍA ============ */
+.agenda{border-top:1px solid var(--linea)}
+.slot{
+  display:grid;grid-template-columns:120px 1fr;gap:34px;
+  padding:26px 0;border-bottom:1px solid var(--linea);
+  transition:.26s;align-items:start;
+}
+.slot:hover{background:var(--arena);padding-left:16px;padding-right:16px}
+.slot-h{font-family:var(--mono);font-size:.85rem;color:var(--bronce);letter-spacing:.05em;padding-top:2px}
+.agenda-shot{margin-top:46px;border-radius:var(--r);overflow:hidden;border:1px solid var(--linea)}
+.agenda-shot img{width:100%;height:420px;object-fit:cover;object-position:56% 0%;display:block}
+.agenda-shot figcaption{
+  background:#fff;padding:13px 18px;font-family:var(--mono);font-size:.7rem;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--gris);border-top:1px solid var(--linea);
+}
+.slot h3{font-size:1.1rem;margin-bottom:5px}
+.slot p{font-size:.93rem;color:var(--gris);line-height:1.58}
+
+/* ============ TESTIMONIOS ============ */
+.score-head{
+  display:flex;gap:42px;align-items:center;flex-wrap:wrap;
+  padding-bottom:38px;margin-bottom:44px;border-bottom:1px solid var(--linea);
+}
+.score-num{font-family:var(--display);font-size:4.6rem;line-height:.9;font-variation-settings:'opsz' 144}
+.score-num sub{font-size:1.5rem;color:var(--gris);font-family:var(--body);vertical-align:baseline}
+.stars{color:var(--bronce);font-size:1.05rem;letter-spacing:.16em;margin-bottom:5px}
+.score-meta{font-size:.9rem;color:var(--gris);line-height:1.55}
+.score-meta b{color:var(--tinta)}
+
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.quote{
+  background:#fff;border:1px solid var(--linea);padding:32px 28px 26px;
+  border-radius:var(--r);display:flex;flex-direction:column;transition:.3s;
+}
+.quote:hover{transform:translateY(-4px);box-shadow:0 18px 46px rgba(26,16,23,.09);border-color:var(--bronce-claro)}
+.q-result{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  color:#fff;background:var(--berenjena);display:inline-block;
+  padding:5px 11px;border-radius:var(--r);margin-bottom:20px;align-self:flex-start;
+}
+.q-text{
+  font-family:var(--display);font-size:1.06rem;line-height:1.54;
+  margin-bottom:24px;flex:1;font-variation-settings:'opsz' 36;
+}
+.q-who{display:flex;align-items:center;gap:12px;padding-top:18px;border-top:1px solid var(--linea)}
+.q-av{
+  width:38px;height:38px;border-radius:50%;background:var(--arena);
+  border:1px solid var(--linea);flex:none;display:flex;align-items:center;
+  justify-content:center;font-family:var(--display);font-size:.9rem;color:var(--bronce);
+}
+.q-who b{display:block;font-size:.89rem;font-weight:600}
+.q-who span{font-size:.78rem;color:var(--gris)}
+.ph-note{
+  margin-top:30px;font-family:var(--mono);font-size:.72rem;color:var(--gris);
+  background:var(--arena);border-left:2px solid var(--bronce);padding:13px 16px;line-height:1.65;
+}
+
+/* ============ OBJECIONES / FAQ ============ */
+.faq{border-top:1px solid var(--linea)}
+.fq{border-bottom:1px solid var(--linea)}
+.fq summary{
+  padding:24px 40px 24px 0;font-size:1.04rem;font-weight:500;
+  cursor:pointer;position:relative;list-style:none;transition:.24s;
+  font-family:var(--display);font-variation-settings:'opsz' 36;
+}
+.fq summary::-webkit-details-marker{display:none}
+.fq summary::after{
+  content:"+";position:absolute;right:6px;top:50%;transform:translateY(-50%);
+  font-size:1.4rem;color:var(--bronce);font-weight:300;transition:.28s;line-height:1;
+}
+.fq[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+.fq summary:hover{color:var(--bronce)}
+.fq-a{padding:0 60px 26px 0;color:var(--gris);font-size:.97rem;line-height:1.68}
+.fq-a strong{color:var(--tinta);font-weight:500}
+
+/* ============ CAPTURA DE LEADS ============ */
+.lead-sec{background:var(--arena);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
+.lead-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+.gift-shot{
+  margin-top:26px;border-radius:var(--r);overflow:hidden;border:1px solid var(--linea);
+  background:#A08E9D;display:flex;align-items:center;justify-content:center;
+}
+.gift-shot img{width:240px;max-width:80%;height:240px;object-fit:contain;display:block;flex:none}
+.gift-ph{background:var(--arena);border-style:dashed;min-height:200px;padding:30px 26px;text-align:center}
+.gift-ph b{display:block;font-family:var(--display);font-size:1.1rem;color:var(--tinta);margin-bottom:8px}
+.gift-ph span{font-family:var(--mono);font-size:.7rem;line-height:1.7;color:var(--gris)}
+.gift{
+  background:#fff;border:1px solid var(--linea);padding:26px 28px;
+  border-radius:var(--r);margin-top:18px;
+}
+.gift-row{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--linea);align-items:flex-start}
+.gift-row:last-child{border-bottom:none}
+.gift-n{
+  font-family:var(--mono);font-size:.7rem;color:var(--bronce);
+  border:1px solid var(--bronce);width:22px;height:22px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px;
+}
+.gift-row b{display:block;font-size:.94rem;margin-bottom:2px;font-weight:600}
+.gift-row span{font-size:.84rem;color:var(--gris);line-height:1.5;display:block}
+
+.form-card{background:#fff;border:1px solid var(--linea);padding:40px 36px;border-radius:var(--r)}
+.form-card h3{font-size:1.5rem;margin-bottom:10px;font-variation-settings:'opsz' 60}
+.form-card > p{font-size:.92rem;color:var(--gris);margin-bottom:26px;line-height:1.6}
+.field{margin-bottom:15px}
+.field label{
+  display:block;font-family:var(--mono);font-size:.68rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--gris);margin-bottom:7px;
+}
+.field input{
+  width:100%;padding:14px 16px;border:1px solid var(--linea);
+  background:var(--papel);font-family:var(--body);font-size:.96rem;
+  border-radius:var(--r);transition:.24s;color:var(--tinta);
+}
+.field input:focus{outline:none;border-color:var(--bronce);background:#fff;box-shadow:0 0 0 3px rgba(168,124,79,.13)}
+.form-note{font-size:.76rem;color:var(--gris);margin-top:14px;text-align:center;line-height:1.55}
+.form-ok{
+  display:none;background:#EEF3EC;border:1px solid var(--salvia);
+  padding:20px;border-radius:var(--r);text-align:center;font-size:.94rem;line-height:1.6;
+}
+.form-ok b{display:block;margin-bottom:4px;font-family:var(--display);font-size:1.1rem}
+
+/* ============ BANDA FINAL ============ */
+.band{background:var(--berenjena);color:#fff;padding:74px 0;text-align:center;position:relative;overflow:hidden}
+.band-bg{
+  position:absolute;inset:0;background-size:cover;background-position:center 30%;
+  opacity:.16;filter:grayscale(.4);
+}
+.band::before{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(to bottom,rgba(51,32,47,.94),rgba(51,32,47,.82)),
+    radial-gradient(ellipse 760px 400px at 50% 0%,rgba(168,124,79,.26),transparent 65%);
+}
+.band-in{position:relative;z-index:2}
+.band h2{margin-bottom:16px}
+.band p{color:#C4B5C0;max-width:600px;margin:0 auto 30px;font-size:1.05rem;line-height:1.66}
+.band-perks{
+  display:flex;gap:0;justify-content:center;flex-wrap:wrap;
+  margin:0 auto 34px;max-width:840px;
+  border:1px solid rgba(255,255,255,.13);
+}
+.perk{
+  flex:1 1 200px;padding:20px 22px;border-right:1px solid rgba(255,255,255,.13);
+  font-size:.85rem;line-height:1.5;color:#C4B5C0;
+}
+.perk:last-child{border-right:none}
+.perk b{display:block;color:#fff;font-size:.9rem;margin-bottom:3px;font-weight:600}
+.countdown{
+  display:inline-flex;gap:0;border:1px solid rgba(255,255,255,.2);
+  margin-bottom:32px;
+}
+.cd{padding:16px 26px;border-right:1px solid rgba(255,255,255,.2);text-align:center}
+.cd:last-child{border-right:none}
+.cd b{display:block;font-family:var(--display);font-size:2rem;line-height:1;font-variation-settings:'opsz' 72}
+.cd span{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:#9C8A98;margin-top:5px;display:block}
+.band-last{font-family:var(--mono);font-size:.75rem;color:#9C8A98;margin-top:22px;letter-spacing:.03em}
+
+/* ============ FOOTER ============ */
+.foot{background:var(--tinta);color:#B0A2AC;padding:72px 0 0;font-size:.9rem}
+.foot-grid{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:46px;padding-bottom:52px}
+.foot-brand .logo{color:#fff;display:block;margin-bottom:16px}
+.foot-brand p{line-height:1.66;max-width:290px;color:#8E8089;font-size:.88rem}
+.socials{display:flex;gap:11px;margin-top:24px}
+.soc{
+  width:38px;height:38px;border:1px solid #382A34;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;transition:.26s;
+}
+.soc:hover{background:var(--bronce);border-color:var(--bronce)}
+.soc svg{stroke:#B0A2AC;transition:.26s}
+.soc:hover svg{stroke:#fff}
+.foot h4{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;
+  color:#fff;margin-bottom:18px;font-weight:500;
+}
+.foot ul{list-style:none}
+.foot ul li{margin-bottom:11px}
+.foot ul a{color:#8E8089;transition:.22s;font-size:.88rem}
+.foot ul a:hover{color:var(--bronce-claro)}
+.foot-contact li{display:flex;gap:10px;align-items:flex-start;color:#8E8089;font-size:.88rem;line-height:1.5}
+.foot-bot{
+  border-top:1px solid #2A1E27;padding:26px 0;
+  display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  font-size:.79rem;color:#6E626B;
+}
+.foot-bot span{font-style:italic;font-family:var(--display)}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:1040px){
+  .hero-grid,.story-grid,.lead-grid{grid-template-columns:1fr;gap:44px}
+  .entry{grid-template-columns:1fr}
+  .entry-buy{border-left:none;border-top:1px solid var(--linea)}
+  .ladder{grid-template-columns:1fr}
+  .rung{border-right:none;border-bottom:1px solid var(--linea)}
+  .quotes{grid-template-columns:1fr}
+  .trust-grid{grid-template-columns:repeat(2,1fr)}
+  .tcell{border-bottom:1px solid var(--linea)}
+  .tcell:nth-child(2n){border-right:none}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:34px}
+}
+@media (max-width:720px){
+  .wrap,.narrow{padding:0 20px}
+  .nav-links{display:none}
+  .nav{padding:16px 0}
+  .nav.scrolled{padding:11px 0}
+  .logo{font-size:.86rem;letter-spacing:.12em}
+  .nav-cta{padding:13px 16px;font-size:.78rem}
+  .hero{padding-top:126px}
+  .hero h1{font-size:clamp(2.4rem,10vw,3.2rem)}
+  .hero-sub{font-size:1.04rem}
+  .hero-stats,.story-facts{grid-template-columns:repeat(2,1fr)}
+  .hero-bg{background-position:62% 32%;opacity:.22}
+  .sec{padding:66px 0}
+  .sec-head{margin-bottom:38px}
+  .entry-body,.entry-buy,.form-card{padding:30px 22px}
+  .slot{grid-template-columns:1fr;gap:6px}
+  .slot-h{font-size:.78rem}
+  .trust-grid{grid-template-columns:1fr}
+  .tcell{border-right:none;padding:22px 20px}
+  .foot-grid{grid-template-columns:1fr;gap:32px}
+  .score-head{gap:24px}
+  .band-perks{flex-direction:column}
+  .perk{border-right:none;border-bottom:1px solid rgba(255,255,255,.13)}
+  .countdown{display:grid;grid-template-columns:repeat(2,1fr);width:100%}
+  .cd{border-right:none;border-bottom:1px solid rgba(255,255,255,.2)}
+  .cd:nth-child(odd){border-right:1px solid rgba(255,255,255,.2)}
+
+  /* medidor: notches más altos y legibles para el dedo */
+  .meter{padding:26px 20px 24px}
+  .meter-q{font-size:1.24rem}
+  .scale{gap:4px}
+  .notch{aspect-ratio:auto;height:62px;font-size:.72rem;padding-bottom:6px}
+  .scale-lbl{font-size:.58rem}
+  .meter-out{font-size:.9rem}
+
+  /* fotos */
+  .agenda-shot img{height:300px;object-position:56% 0%}
+  .gift-shot img{width:200px;height:200px}
+  .story-photo{background-position:center 18%}
+
+  /* precio */
+  .price{font-size:2.4rem}
+  .pricejump{flex-direction:column;align-items:flex-start;gap:3px;padding:10px 14px}
+  .entry-for{padding:14px 15px}
+
+  /* tap targets del footer */
+  .foot ul li{margin-bottom:4px}
+  .foot ul a{display:inline-block;padding:9px 0;font-size:.92rem}
+  .foot-contact li{padding:6px 0}
+  .soc{width:44px;height:44px}
+  .fq summary{padding:20px 36px 20px 0;font-size:.98rem}
+  .fq-a{padding:0 8px 22px 0}
+}
+
+@media (max-width:400px){
+  .logo{font-size:.78rem;letter-spacing:.08em}
+  .nav-cta{padding:13px 13px;font-size:.72rem}
+  .hero h1{font-size:2.25rem}
+  .notch{height:56px;font-size:.66rem}
+  .price{font-size:2.15rem}
+  .score-num{font-size:3.6rem}
+  .quote{padding:26px 20px 22px}
+}
+
+/* reveal + accesibilidad */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1)}
+.rv.in{opacity:1;transform:none}
+:focus-visible{outline:2px solid var(--bronce);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAVBAR ============ -->
+<nav class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="logo">ESTÁS PARA MÁS</a>
+    <div class="nav-links">
+      <a href="#el-dia">El día</a>
+      <a href="#historia">Valentina</a>
+      <a href="#camino">El camino</a>
+      <a href="#historias">Historias</a>
+      <a href="#dudas">Dudas</a>
+    </div>
+    <a href="#reservar" class="nav-cta">Reservar mi lugar</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="hero-bg" style="background-image:url('assets/img/hero-audiencia.jpg')"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Evento presencial · Buenos Aires</div>
+        <h1>Una vida 7<br>no se arregla <em>sola.</em></h1>
+        <p class="hero-sub">
+          No te separaste. No te echaron. No pasó nada.
+          <strong>Y ese es exactamente el problema.</strong>
+        </p>
+        <div class="hero-story">
+          Un 4 te obliga a moverte. Un 7 te deja quieta doce años esperando que mejore
+          solo. <b>El 17 de agosto dejás de esperar.</b>
+        </div>
+        <div class="hero-ctas">
+          <a href="#reservar" class="btn btn-primary">Reservar mi lugar <span class="arw">→</span></a>
+          <a href="#el-dia" class="btn btn-ghost">Ver qué pasa ese día</a>
+        </div>
+        <div class="hero-micro"><span class="dot"></span> Lunes 17 de agosto · Feriado · $45.000 hasta el 10/08</div>
+      </div>
+
+      <!-- FIRMA: el medidor -->
+      <div class="meter">
+        <div class="meter-q">Ponele un número a tu vida.</div>
+        <div class="meter-hint">Del 1 al 10. Rápido, no lo pienses.</div>
+        <div class="scale" id="scale"></div>
+        <div class="scale-lbl"><span>Insostenible</span><span>Exactamente la que querés</span></div>
+        <div class="meter-out" id="out">
+          <strong>Elegí un número.</strong>
+          La mayoría tarda menos de dos segundos en saber cuál es.
+        </div>
+      </div>
+    </div>
+
+    <!-- stats de confianza -->
+    <div class="hero-stats">
+      <div class="hstat"><b>11 hs</b><span>Un día entero,<br>sin celular</span></div>
+      <div class="hstat"><b>150</b><span>Mujeres en la<br>misma sala</span></div>
+      <div class="hstat"><b>1</b><span>Decisión que venís<br>postergando, tomada</span></div>
+      <div class="hstat"><b>3 meses</b><span>De acompañamiento<br>después</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ TRUST BAR ============ -->
+<section class="trust">
+  <div class="wrap">
+    <div class="trust-grid">
+      <div class="tcell">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
+        <div><b>Es feriado</b><span>No pedís el día ni avisás en el trabajo</span></div>
+      </div>
+      <div class="tcell">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 2l2.4 6.9H22l-6 4.3 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.3h7.6z"/></svg>
+        <div><b>Una sala llena</b><span>150 mujeres con la misma pregunta</span></div>
+      </div>
+      <div class="tcell">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 15h6"/></svg>
+        <div><b>Salís con una decisión</b><span>La que venís postergando, con fecha</span></div>
+      </div>
+      <div class="tcell">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.9M16 3.1a4 4 0 010 7.8"/></svg>
+        <div><b>No termina el 17</b><span>Tres meses de acompañamiento después</span></div>
+      </div>
+      <div class="tcell">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <div><b>Todo dicho de antemano</b><span>Precio, lugar, agenda y qué no vas a encontrar</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PUNTO DE ENTRADA ============ -->
+<section class="sec" id="reservar">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="entry-flag">◆ Punto de entrada</div>
+      <h2>Empezás por acá.</h2>
+      <p class="lead">
+        Un solo día, una sola decisión. Es la puerta de entrada a todo lo demás
+        y no hace falta que sepas nada de antemano.
+      </p>
+    </div>
+
+    <div class="entry rv">
+      <div class="entry-body">
+        <h3>Estás Para Más</h3>
+        <div class="eyebrow" style="margin-bottom:0">Edición Buenos Aires · 17 de agosto de 2026</div>
+
+        <div class="entry-for">
+          <b>Para quién es</b>
+          Para la mujer que tiene el trabajo, el departamento y las amigas, y una sensación
+          adentro que no sabe cómo nombrar. No hace falta que estés en crisis.
+          Alcanza con que estés cansada de que esté todo bien.
+        </div>
+
+        <ul class="incl">
+          <li><span class="chk">✓</span><div><b>Un diagnóstico honesto de en qué punto estás</b><em>Con qué te venís conformando y desde cuándo</em></div></li>
+          <li><span class="chk">✓</span><div><b>El mapa de lo que ya no vas a seguir aceptando</b><em>Escrito por vos, no dictado por nadie</em></div></li>
+          <li><span class="chk">✓</span><div><b>Esa decisión que venís postergando, tomada</b><em>Una sola. La que destraba el resto</em></div></li>
+          <li><span class="chk">✓</span><div><b>Un grupo de mujeres que entienden sin que expliques</b><em>Y que siguen escribiéndose después</em></div></li>
+        </ul>
+
+        <p class="logi">
+          Incluye además jornada completa presencial de 9:00 a 20:00, materiales de trabajo,
+          break con comida incluida y espacio de networking.
+        </p>
+      </div>
+
+      <div class="entry-buy">
+        <div class="pricejump">
+          <span class="pj-now">Hasta el 10 de agosto</span>
+          <span class="pj-then">Después: $65.000</span>
+        </div>
+        <div class="price-row">
+          <div class="price">$45.000</div>
+          <div class="price-alt">o en cuotas</div>
+        </div>
+        <p class="anchor">
+          Once horas por menos de lo que gastás en dos salidas. La diferencia es que de acá
+          salís con la decisión tomada el mismo día, no dentro de dos años.
+        </p>
+
+        <div class="stock">
+          <div class="stock-bar"><div class="stock-fill"></div></div>
+          <div class="stock-txt">Quedan <b>40 de 150 lugares</b></div>
+        </div>
+
+        <a href="#reservar" class="btn btn-dark btn-block">Reservo mi lugar <span class="arw">→</span></a>
+        <p class="pay">Cuotas con Mercado Pago · transferencia o dólares.<br>Capital Federal, Buenos Aires. La dirección exacta se envía al confirmar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AGENDA ============ -->
+<section class="sec tight" id="el-dia" style="background:var(--arena);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="eyebrow">Once horas</div>
+      <h2>Qué pasa ese día.</h2>
+      <p class="lead">De 9 a 20. Once horas es mucho tiempo: tenés derecho a saber en qué las vas a invertir.</p>
+    </div>
+
+    <div class="agenda rv">
+      <div class="slot">
+        <div class="slot-h">01</div>
+        <div><h3>Llegada</h3><p>Quién es cada una y por qué está acá. Antes de empezar a trabajar, la sala tiene que saber con quién está.</p></div>
+      </div>
+      <div class="slot">
+        <div class="slot-h">02</div>
+        <div><h3>La mentalidad</h3><p>Qué cabeza hace falta para construir una vida que te transforme. Sin esto, todo lo que viene después no se sostiene.</p></div>
+      </div>
+      <div class="slot">
+        <div class="slot-h">03</div>
+        <div><h3>Hacerte cargo</h3><p>El espacio para mirar de frente lo que no funciona y responsabilizarte de transformarlo. Es la parte incómoda del día.</p></div>
+      </div>
+      <div class="slot">
+        <div class="slot-h">04</div>
+        <div><h3>Break y networking</h3><p>Con comida incluida. Acá es donde suele pasar algo que no está en la agenda.</p></div>
+      </div>
+      <div class="slot">
+        <div class="slot-h">05</div>
+        <div><h3>Ponencia invitada</h3><p>Una invitada trabajando sobre el entorno: con quién te rodeás y cuánto de tu vida lo decide eso.</p></div>
+      </div>
+      <div class="slot">
+        <div class="slot-h">06</div>
+        <div><h3>Dinámicas</h3><p>De alto impacto, vinculando mente, cuerpo y emoción. No se anticipan: funcionan porque no sabés lo que viene.</p></div>
+      </div>
+      <div class="slot">
+        <div class="slot-h">07</div>
+        <div><h3>Cierre</h3><p>Con qué te vas y qué hacés el martes, cuando el entusiasmo se apaga. Esta es la parte que casi ningún evento te da.</p></div>
+      </div>
+    </div>
+
+    <figure class="agenda-shot rv">
+      <img src="assets/img/agenda-valentina.jpg" alt="Valentina durante una edición anterior del evento" loading="lazy">
+      <figcaption>Edición anterior · Córdoba</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ HISTORIA ============ -->
+<section class="sec dark" id="historia">
+  <div class="wrap">
+    <div class="sec-head rv" style="max-width:720px">
+      <div class="eyebrow">Nuestra historia</div>
+      <h2>Nadie se salva de una vida que está bien.</h2>
+    </div>
+
+    <div class="story-grid">
+      <div class="story-photo rv" style="background-image:url('assets/img/historia-valentina.jpg')"><span class="story-cap">Edición anterior · Córdoba</span></div>
+      <div class="story-body rv">
+        <p>
+          Todo lo que existe en el mercado le habla a la mujer que se rompió. La que se separó,
+          la que perdió el trabajo, la que tocó fondo. Hay cursos, terapias, retiros y libros
+          esperándola del otro lado de la crisis.
+        </p>
+        <p>
+          <strong>Pero hay otra mujer a la que nadie le habla: la que no tiene ninguna excusa
+          válida para sentirse así.</strong> La que tiene trabajo, obra social, pareja, amigas
+          y un departamento decente. La que si dice en voz alta que no está del todo bien,
+          queda como una malagradecida.
+        </p>
+        <p>
+          Esa mujer no tiene lenguaje y no tiene permiso. La terapia le pregunta qué le duele
+          y no sabe qué contestar. La motivación le dice que agradezca lo que tiene. Sus amigas
+          le dicen que está exagerando. Entonces se calla, guarda otro reel y espera que se
+          le pase.
+        </p>
+
+        <div class="pull">
+          “También tuve una vida correcta: estable, aprobada por todos, suficiente desde afuera.
+          Hasta que me hice la pregunta que venía evitando.”
+        </div>
+
+        <p>
+          Estás Para Más nace de ahí. No de una teoría ni de una certificación, sino de haber
+          estado exactamente en ese lugar y haber tardado años en darme cuenta de que un 7
+          nunca se convierte solo en un 10.
+        </p>
+        <p>
+          <strong>Mi trabajo no es que me sigas. Es que aprendas a confiar en vos misma.</strong>
+          Por eso esto no es un evento de motivación: es un día incómodo con una decisión
+          que venís postergando.
+        </p>
+
+        <div class="story-facts">
+          <div class="sfact"><b>2024</b><span>Año desde el que<br>me dedico a esto</span></div>
+          <div class="sfact"><b>+150</b><span>Vidas<br>transformadas</span></div>
+          <div class="sfact"><b>1ª</b><span>Edición presencial<br>en Buenos Aires</span></div>
+        </div>
+        <p style="margin-top:14px;font-family:var(--mono);font-size:.72rem;color:#7E6C7A;line-height:1.6">
+          ⚠ Revisar: el número de edición está puesto como 1ª porque la anterior fue en Córdoba.
+          Confirmar con Valentina si es la primera de Buenos Aires o qué número corresponde.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EL CAMINO / COMPARADOR ============ -->
+<section class="sec" id="camino">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="eyebrow">El camino completo</div>
+      <h2>El 17 no es el final. Es el primer escalón.</h2>
+      <p class="lead">
+        La mayoría de los eventos te dejan motivada un martes y sola el miércoles.
+        Acá el día es la entrada a algo que sigue. Estos son los tres escalones,
+        y podés quedarte en el primero.
+      </p>
+    </div>
+
+    <div class="ladder rv">
+      <div class="rung now">
+        <div class="rung-step">Escalón 1 · Entrada</div>
+        <h3>Estás Para Más</h3>
+        <div class="rung-price">$45.000 ARS</div>
+        <div class="rung-dur">Un día · sube a $65.000 el 10/08</div>
+        <p class="rung-who">
+          Para la que <b>todavía no sabe qué quiere</b>, solo que así no.
+          Si nunca hiciste nada parecido, empezás por acá.
+        </p>
+        <ul>
+          <li>Diagnóstico de tu punto de partida</li>
+          <li>Una decisión que venís postergando, tomada</li>
+          <li>150 mujeres en la misma sala</li>
+          <li>Materiales impresos y almuerzo</li>
+        </ul>
+        <p class="rung-note">Conviene si querés probar la metodología antes de comprometerte con un proceso largo.</p>
+      </div>
+
+      <div class="rung">
+        <div class="rung-step">Escalón 2 · Sostener</div>
+        <h3>Transformarte</h3>
+        <div class="rung-price">USD 300</div>
+        <div class="rung-dur">3 meses · 24 encuentros</div>
+        <p class="rung-who">
+          Para la que <b>ya sabe qué decidió</b> y necesita no quedarse sola en el intento.
+          Es el escalón que evita que se apague a los diez días.
+        </p>
+        <ul>
+          <li>Programa grabado completo</li>
+          <li>24 encuentros grupales en vivo</li>
+          <li>Comunidad activa entre encuentros</li>
+          <li>Seguimiento de tu decisión</li>
+        </ul>
+        <p class="rung-note">Conviene si tu historial es entusiasmarte y abandonar. Acá el entorno hace el trabajo que la fuerza de voluntad no hace.</p>
+      </div>
+
+      <div class="rung">
+        <div class="rung-step">Escalón 3 · Acelerar</div>
+        <h3>Claridad Definitiva</h3>
+        <div class="rung-price" style="font-size:1.15rem;line-height:1.35">Requiere entrevista previa</div>
+        <div class="rung-dur">6 meses · 1:1 + grupal</div>
+        <p class="rung-who">
+          Para la que <b>ya tomó la decisión grande</b> y está construyendo algo concreto
+          que necesita otro nivel de acompañamiento.
+        </p>
+        <ul>
+          <li>Sesiones individuales durante 6 meses</li>
+          <li>Acompañamiento 1:1 y también grupal</li>
+          <li>Programa grabado completo</li>
+          <li>Roadmap personalizado</li>
+        </ul>
+        <p class="rung-note">No se compra: se postula. Hay una llamada de consultoría previa para ver si es tu momento, y no entran todas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIOS ============ -->
+<section class="sec" id="historias" style="background:var(--arena);border-top:1px solid var(--linea)">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="eyebrow">Historias</div>
+      <h2>Mujeres que decidieron.</h2>
+      <p class="lead">
+        Ninguna sabía bien qué venía a buscar. Todas se fueron sabiéndolo.
+        Esto es lo que hicieron después.
+      </p>
+    </div>
+
+    <div class="score-head rv">
+      <div>
+        <div class="score-num">4,9<sub>/5</sub></div>
+      </div>
+      <div>
+        <div class="stars">★★★★★</div>
+        <p class="score-meta">
+          Basado en <b>[X] respuestas</b> de asistentes de las ediciones anteriores.<br>
+          <b>[X]%</b> volvería a hacerlo · <b>[X]%</b> continuó en Transformarte.
+        </p>
+      </div>
+    </div>
+
+    <div class="quotes rv">
+      <div class="quote">
+        <span class="q-result">Renunció a las 3 semanas</span>
+        <p class="q-text">
+          “Me escribió a las once de la noche: acabo de dar el preaviso para seguir mi sueño.
+          No se lo dije yo. Por fin se lo dijo ella.”
+        </p>
+        <div class="q-who">
+          <div class="q-av">R</div>
+          <div><b>[Nombre real]</b><span>[Edad] · [Ciudad]</span></div>
+        </div>
+      </div>
+
+      <div class="quote">
+        <span class="q-result">Cerró su primera clienta</span>
+        <p class="q-text">
+          “Tengo una persona que me pide sesiones de coaching y estoy cerrando con ella.
+          Hace dos años que decía que algún día iba a empezar.”
+        </p>
+        <div class="q-who">
+          <div class="q-av">M</div>
+          <div><b>[Nombre real]</b><span>[Edad] · [Ciudad]</span></div>
+        </div>
+      </div>
+
+      <div class="quote">
+        <span class="q-result">Le daba miedo el precio</span>
+        <p class="q-text">
+          “Lo pagué en seis cuotas y estuve un mes pensando si estaba haciendo una locura.
+          Salí con una decisión tomada. La cumplí en noviembre.”
+        </p>
+        <div class="q-who">
+          <div class="q-av">E</div>
+          <div><b>[Nombre real]</b><span>[Edad] · [Ciudad]</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="ph-note rv">
+      ⚠ MOCKUP · Los tres testimonios están redactados a partir de las capturas de WhatsApp
+      que ya están en el sitio actual, pero los nombres, edades, ciudades y el score son
+      placeholders. Antes de publicar: conseguir autorización escrita de cada mujer y
+      reemplazar por datos reales. El brief marca el tercer testimonio (miedo al precio)
+      como prioritario: es el único que ataca la objeción #1 declarada por la marca.
+    </p>
+  </div>
+</section>
+
+<!-- ============ OBJECIONES ============ -->
+<section class="sec" id="dudas">
+  <div class="wrap">
+    <div class="sec-head rv" style="max-width:720px">
+      <div class="eyebrow">Antes de decidir</div>
+      <h2>Lo que probablemente estés pensando.</h2>
+    </div>
+
+    <div class="faq narrow rv" style="padding:0">
+      <details class="fq">
+        <summary>Ya probé otras cosas y no me funcionaron. ¿Por qué esto sí?</summary>
+        <div class="fq-a">
+          Te lo digo derecho: si venís a escuchar, no vengas. Lo que suele fallar en un curso
+          o un taller es que todo pasa de la cabeza para arriba: salís con ideas y ninguna
+          decisión. Acá trabajamos con <strong>dinámicas de alto impacto que vinculan mente,
+          cuerpo y emoción</strong>, que es lo que hace que algo se mueva de verdad y no se
+          quede en un apunte. El estándar es simple: si te vas igual que como entraste,
+          no funcionó.
+        </div>
+      </details>
+      <details class="fq">
+        <summary>¿Esto reemplaza la terapia?</summary>
+        <div class="fq-a">
+          No, y no quiero que lo haga. La terapia procesa lo que te pasó; este día define
+          lo que vas a hacer. Muchas de las que vienen están en terapia y siguen después.
+          <strong>Si estás atravesando una crisis de salud mental, esto no es lo que necesitás
+          ahora</strong> y te lo voy a decir así de claro si me escribís por WhatsApp.
+        </div>
+      </details>
+      <details class="fq">
+        <summary>Voy a ir sola y no conozco a nadie.</summary>
+        <div class="fq-a">
+          Casi todas vienen solas: es la norma, no la excepción. Somos 150, pero el día está
+          armado para que trabajes en grupos chicos, así que para el break ya conocés gente.
+          Y no hay ningún momento en el que tengas que pararte a hablar delante de la sala
+          si no querés.
+        </div>
+      </details>
+      <details class="fq">
+        <summary>No sé bien qué quiero. ¿Vengo igual?</summary>
+        <div class="fq-a">
+          Esa es la condición de entrada, no un problema. Si ya supieras qué querés, no
+          necesitarías el día. La mayoría llega sabiendo perfectamente qué <em>no</em> quiere
+          y sin ninguna claridad sobre lo demás.
+        </div>
+      </details>
+      <details class="fq">
+        <summary>¿Qué pasa el día después?</summary>
+        <div class="fq-a">
+          Es la pregunta correcta y la que casi ningún evento responde. Te llevás la decisión
+          tomada y el contacto del grupo. Si querés que alguien te sostenga los meses
+          siguientes, ahí entra Transformarte: tres meses, veinticuatro encuentros. Pero no es
+          obligatorio y no te lo voy a vender ese día.
+        </div>
+      </details>
+      <details class="fq">
+        <summary>¿Puedo pagar en cuotas? ¿Hay devolución?</summary>
+        <div class="fq-a">
+          Sí, en cuotas con Mercado Pago. Si pagás por transferencia o en dólares, es en un
+          solo pago. Te aviso algo igual: <strong>el 10 de agosto la entrada pasa de $45.000
+          a $65.000</strong>. No es una técnica de venta, es el precio que va a tener a partir
+          de esa fecha. Sobre devoluciones prefiero decírtelo acá y no en la letra chica:
+          <strong>no se devuelve el dinero, pero sí podés transferirle tu entrada a otra
+          persona</strong> si al final no podés venir. Si tenés dudas, escribime por WhatsApp
+          antes de pagar y lo hablamos.
+        </div>
+      </details>
+      <details class="fq">
+        <summary>¿Dónde es exactamente?</summary>
+        <div class="fq-a">
+          Salón privado en Capital Federal, Buenos Aires. La dirección exacta se envía al
+          confirmar la inscripción, por una cuestión de privacidad del grupo.
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAPTURA DE LEADS ============ -->
+<section class="sec lead-sec">
+  <div class="wrap">
+    <div class="lead-grid">
+      <div class="rv">
+        <div class="eyebrow">Todavía no estás lista para decidir</div>
+        <h2 style="margin-bottom:18px">Entonces empezá por acá.</h2>
+        <p class="lead">
+          Si el precio te frena o simplemente no es el momento, no te vayas con las manos
+          vacías. Dejame tu mail y te mando tres cosas para empezar sola.
+        </p>
+
+        <figure class="gift-shot gift-ph">
+          <div>
+            <b>Foto del journal</b>
+            <span>⚠ Pendiente: Valentina tiene que pasar una foto del journal.<br>La imagen que había acá estaba corrupta en el archivo.</span>
+          </div>
+        </figure>
+        <div class="gift">
+          <div class="gift-row">
+            <div class="gift-n">1</div>
+            <div>
+              <b>El journal de Estás Para Más</b>
+              <span>El cuaderno de trabajo que ya usan las mujeres del ecosistema, en PDF imprimible.</span>
+            </div>
+          </div>
+          <div class="gift-row">
+            <div class="gift-n">2</div>
+            <div>
+              <b>[Regalo 2 — a completar por Valentina]</b>
+              <span>⚠ Placeholder. Valentina define cuál es el segundo recurso propio que quiere entregar acá.</span>
+            </div>
+          </div>
+          <div class="gift-row">
+            <div class="gift-n">3</div>
+            <div>
+              <b>[Regalo 3 — a completar por Valentina]</b>
+              <span>⚠ Placeholder. Valentina define cuál es el tercer recurso. Sin descuentos: el beneficio tiene que ser contenido, no precio.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv">
+        <div class="form-card">
+          <form id="leadForm">
+            <h3>Mandámelos</h3>
+            <p>Escribo cada dos semanas. Si no te sirve, te vas con un clic.</p>
+            <div class="field">
+              <label for="nom">Cómo te llamás</label>
+              <input type="text" id="nom" name="nom" placeholder="Tu nombre" required>
+            </div>
+            <div class="field">
+              <label for="mail">Tu email</label>
+              <input type="email" id="mail" name="mail" placeholder="vos@email.com" required>
+            </div>
+            <button type="submit" class="btn btn-dark btn-block" style="margin-top:8px">
+              Quiero los tres regalos <span class="arw">→</span>
+            </button>
+            <p class="form-note">Sin spam y sin venderte nada en el primer mail. Te podés dar de baja cuando quieras.</p>
+          </form>
+          <div class="form-ok" id="formOk">
+            <b>Listo, [nombre].</b>
+            Te llegan a tu casilla en un minuto. Revisá promociones por las dudas.
+            <span style="display:block;margin-top:10px;font-family:var(--mono);font-size:.7rem;color:var(--gris)">
+              ⚠ Mockup sin backend: no se envía nada.
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BANDA FINAL ============ -->
+<section class="band">
+  <div class="band-bg" style="background-image:url('assets/img/banda-final.jpg')"></div>
+  <div class="wrap band-in">
+    <div class="eyebrow center">Última llamada</div>
+    <h2>El 17 de agosto pasa igual.</h2>
+    <p>La única diferencia es si estás adentro o mirando desde afuera.</p>
+
+    <div class="countdown" id="cd">
+      <div class="cd"><b id="d">--</b><span>Días</span></div>
+      <div class="cd"><b id="h">--</b><span>Horas</span></div>
+      <div class="cd"><b id="m">--</b><span>Minutos</span></div>
+      <div class="cd cd-hi"><b id="pj">--</b><span>Días a $45.000</span></div>
+    </div>
+
+    <div class="band-perks">
+      <div class="perk"><b>Es feriado</b>No pedís el día, no avisás en el trabajo, no negociás con nadie</div>
+      <div class="perk"><b>$45.000 hasta el 10/08</b>Después pasa a $65.000. Es la misma silla</div>
+      <div class="perk"><b>¿Dudás? Escribime</b>Por WhatsApp, antes de pagar. Te contesto yo</div>
+    </div>
+
+    <a href="#reservar" class="btn btn-primary" style="padding:19px 44px;font-size:1rem">
+      Reservo mi lugar <span class="arw">→</span>
+    </a>
+    <p class="band-last">Cuando se llenen los 150 lugares, la próxima edición es el año que viene.</p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="logo">ESTÁS PARA MÁS</span>
+        <p>
+          Una experiencia de expansión de identidad para mujeres que saben
+          que su vida puede ser más grande.
+        </p>
+        <div class="socials">
+          <a href="#" class="soc" aria-label="Instagram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          </a>
+          <a href="#" class="soc" aria-label="WhatsApp">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M21 11.5a8.4 8.4 0 01-12.6 7.3L3 21l2.3-5.3A8.4 8.4 0 1121 11.5z"/></svg>
+          </a>
+          <a href="#" class="soc" aria-label="YouTube">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4>El evento</h4>
+        <ul>
+          <li><a href="#el-dia">Qué pasa ese día</a></li>
+          <li><a href="#reservar">Precio e inscripción</a></li>
+          <li><a href="#dudas">Preguntas frecuentes</a></li>
+          <li><a href="#historias">Historias reales</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>El camino</h4>
+        <ul>
+          <li><a href="#camino">Transformarte</a></li>
+          <li><a href="#camino">Claridad Definitiva</a></li>
+          <li><a href="#historia">Quién es Valentina</a></li>
+          <li><a href="#">Comunidad</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contacto</h4>
+        <ul class="foot-contact">
+          <li>WhatsApp directo<br><a href="#">+54 9 11 ···· ····</a></li>
+          <li>hola@estasparamas.com</li>
+          <li>Salón privado<br>Capital Federal, Buenos Aires</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bot">
+      <div>© 2026 Estás Para Más · Términos · Privacidad</div>
+      <span>Hay una forma de vivir que todavía no conocés.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* navbar sticky */
+const nav=document.getElementById('nav');
+let tick=false;
+addEventListener('scroll',()=>{
+  if(!tick){requestAnimationFrame(()=>{
+    nav.classList.toggle('scrolled',scrollY>60);tick=false;
+  });tick=true;}
+},{passive:true});
+
+/* firma: medidor 1-10 */
+const scale=document.getElementById('scale'),out=document.getElementById('out');
+const msg={
+  1:['Eso no es un 7.','Si tu vida está en un 1, lo que necesitás hoy es ayuda profesional, no un evento. Escribinos igual y te oriento hacia dónde ir.'],
+  2:['Eso no es un 7.','Si tu vida está en un 2, lo que necesitás hoy es ayuda profesional, no un evento. Escribinos igual y te oriento hacia dónde ir.'],
+  3:['Un 3 duele y se nota.','Al menos tenés eso a favor: un 3 te empuja. Igual, si estás atravesando algo serio, empezá por un profesional.'],
+  4:['Un 4 te obliga a moverte.','Y eso es una ventaja. El problema real no es el 4: es el 7.'],
+  5:['La mitad exacta.','Ni tan mal como para explotar, ni tan bien como para quedarte tranquila. El limbo más largo.'],
+  6:['Casi el 7.','Un 6 es un 7 al que todavía le queda algo de incomodidad útil. Aprovechala antes de que se acomode.'],
+  7:['Ahí está.','El 7 es el peor número que te puede tocar. No está mal, y por eso no hacés nada. Y así se te van los años esperando que un 7 se convierta solo en un 10.'],
+  8:['Un 8 muy declarado.','Casi nadie que pone 8 lo sostiene diez segundos. Volvé a mirar el número y contestá otra vez.'],
+  9:['¿Un 9, en serio?','Si es cierto, felicitaciones honestas. Si lo pusiste para no mirar el número real, ya sabés cuál era.'],
+  10:['Nadie tiene un 10.','Y quien lo pone es porque no quiere abrir la pregunta. No pasa nada: la abrís cuando quieras.']
+};
+for(let i=1;i<=10;i++){
+  const b=document.createElement('button');
+  b.className='notch'+(i===7?' seven':'');
+  b.textContent=i;b.type='button';
+  b.setAttribute('aria-label','Puntuar mi vida con '+i);
+  b.onclick=()=>{
+    document.querySelectorAll('.notch').forEach(n=>n.classList.remove('on'));
+    b.classList.add('on');
+    out.innerHTML='<strong>'+msg[i][0]+'</strong>'+msg[i][1];
+  };
+  scale.appendChild(b);
+}
+
+/* contador al 17/08/2026 + salto de precio 10/08 */
+const target=new Date('2026-08-17T09:00:00-03:00');
+const jump=new Date('2026-08-10T23:59:00-03:00');
+function tickCd(){
+  const now=new Date(), diff=target-now, dj=jump-now;
+  if(diff>0){
+    document.getElementById('d').textContent=Math.floor(diff/864e5);
+    document.getElementById('h').textContent=Math.floor(diff/36e5)%24;
+    document.getElementById('m').textContent=Math.floor(diff/6e4)%60;
+  }
+  const pj=document.getElementById('pj');
+  if(pj) pj.textContent = dj>0 ? Math.floor(dj/864e5) : '0';
+}
+tickCd();setInterval(tickCd,30000);
+
+/* formulario mockup */
+document.getElementById('leadForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const n=document.getElementById('nom').value.trim()||'che';
+  const ok=document.getElementById('formOk');
+  ok.querySelector('b').textContent='Listo, '+n+'.';
+  e.target.style.display='none';
+  ok.style.display='block';
+});
+
+/* reveal on scroll */
+const io=new IntersectionObserver(es=>{
+  es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})
+},{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

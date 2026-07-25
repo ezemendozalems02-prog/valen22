@@ -3,3 +3,21 @@ Thumbs.db
 node_modules/
 .netlify/
 *.log
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+
+# Vercel
+.vercel/
+
+# Variables de entorno (nunca commitear credenciales)
+.env
+.env.local
+.env*.local
+
+*.tsbuildinfo
+
+# Configuración local de Claude Code
+.claude/

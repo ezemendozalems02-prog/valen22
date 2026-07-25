@@ -1,0 +1,31 @@
+{
+  "name": "estas-para-mas-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing del evento Estás Para Más con venta de entradas vía Mercado Pago Checkout Pro",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.0",
+    "mercadopago": "^2.5.0",
+    "next": "^15.4.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "server-only": "^0.0.1",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.6",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^15.4.0",
+    "typescript": "^5.8.0"
+  }
+}

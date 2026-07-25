@@ -5,6 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Estás Para Más — Una vida 7 no se arregla sola</title>
 <meta name="description" content="Una experiencia de expansión de identidad para mujeres que saben que su vida puede ser más grande. 17 de agosto de 2026, Buenos Aires.">
+<script>
+/* Decide ANTES del primer paint si se muestra el onboarding de bienvenida,
+   para que nunca se vea un flash de la landing debajo.
+   Reinicio en desarrollo: agregar ?onboarding=reset a la URL
+   o ejecutar window.resetOnboarding() en la consola. */
+(function(){
+  try{
+    var params = new URLSearchParams(location.search);
+    if(params.get('onboarding') === 'reset'){
+      sessionStorage.removeItem('event-onboarding-completed');
+      sessionStorage.removeItem('event-life-score');
+      sessionStorage.removeItem('event-takes-responsibility');
+    }
+    if(sessionStorage.getItem('event-onboarding-completed') !== '1'){
+      document.documentElement.setAttribute('data-onboarding','pending');
+    }
+  }catch(e){ /* sessionStorage bloqueado: mostrar la landing directa */ }
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -652,6 +671,89 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
   .quote{padding:26px 20px 22px}
 }
 
+/* ============ ONBOARDING DE BIENVENIDA ============ */
+#onboarding{display:none}
+html[data-onboarding="pending"]{overflow:hidden}
+html[data-onboarding="pending"] body{overflow:hidden}
+html[data-onboarding="pending"] #onboarding{display:block}
+#onboarding{
+  position:fixed;inset:0;z-index:1000;min-height:100dvh;color:#fff;
+  background:
+    radial-gradient(ellipse 900px 620px at 78% 8%,rgba(168,124,79,.20),transparent 62%),
+    radial-gradient(ellipse 700px 520px at 10% 98%,rgba(168,124,79,.12),transparent 65%),
+    var(--berenjena);
+  transition:opacity .5s ease;
+}
+#onboarding.ob-done{opacity:0;pointer-events:none}
+.ob-top{
+  position:absolute;top:0;left:0;right:0;z-index:2;pointer-events:none;
+  display:flex;flex-direction:column;align-items:center;gap:13px;padding:26px 20px 0;
+}
+.ob-brand{font-family:var(--display);font-size:.92rem;letter-spacing:.17em;color:#fff}
+.ob-progress{display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;transition:opacity .4s}
+.ob-progress.show{opacity:1}
+.ob-progress span{font-family:var(--mono);font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:#9C8A98}
+.ob-bar{width:120px;height:2px;background:rgba(255,255,255,.14);border-radius:2px;overflow:hidden}
+.ob-bar i{display:block;height:100%;width:0;background:var(--bronce-claro);transition:width .5s cubic-bezier(.2,.7,.3,1)}
+.ob-step{
+  position:absolute;inset:0;display:flex;overflow-y:auto;
+  padding:104px 24px 46px;text-align:center;
+  opacity:0;pointer-events:none;transform:translateX(42px);
+  transition:opacity .45s ease,transform .45s cubic-bezier(.2,.7,.3,1);
+}
+.ob-step.active{opacity:1;pointer-events:auto;transform:none}
+.ob-inner{max-width:680px;width:100%;margin:auto}
+.ob-eyebrow{font-family:var(--mono);font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--bronce-claro);margin-bottom:22px}
+.ob-step h2{
+  font-family:var(--display);font-weight:400;color:#fff;outline:none;
+  font-size:clamp(1.65rem,4.6vw,2.7rem);line-height:1.16;letter-spacing:-.015em;
+  margin-bottom:18px;font-variation-settings:'opsz' 96;
+}
+.ob-sub{font-size:1.04rem;color:#C4B5C0;line-height:1.66;max-width:48ch;margin:0 auto 34px}
+.ob-scale{display:grid;grid-template-columns:repeat(10,1fr);gap:8px;max-width:620px;margin:0 auto 10px}
+.ob-num{
+  border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.04);color:#C4B5C0;
+  font-family:var(--mono);font-size:1.05rem;border-radius:var(--r);
+  aspect-ratio:1/1.35;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:.22s;padding:0;
+}
+.ob-num:hover{border-color:var(--bronce);background:rgba(168,124,79,.26);color:#fff;transform:translateY(-3px)}
+.ob-num[aria-pressed="true"]{
+  background:var(--bronce);border-color:var(--bronce-claro);color:#fff;font-weight:500;
+  box-shadow:0 0 0 3px rgba(201,162,119,.38);transform:translateY(-3px);
+}
+.ob-scale-lbl{
+  display:flex;justify-content:space-between;max-width:620px;margin:0 auto 6px;
+  font-family:var(--mono);font-size:.62rem;color:#7E6C7A;letter-spacing:.1em;text-transform:uppercase;
+}
+.ob-choices{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.ob-choice{
+  border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.05);color:#fff;
+  padding:18px 34px;font-size:.98rem;font-family:var(--body);font-weight:500;
+  border-radius:var(--r);cursor:pointer;transition:.24s;min-width:232px;
+}
+.ob-choice:hover{border-color:var(--bronce);background:rgba(168,124,79,.30);transform:translateY(-2px)}
+.ob-back{
+  margin-top:36px;background:none;border:none;color:#9C8A98;cursor:pointer;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:10px 14px;transition:.22s;
+}
+.ob-back:hover{color:#fff}
+.ob-result .ob-sub{margin-bottom:16px}
+.ob-quote{
+  font-family:var(--display);font-style:italic;font-size:1.32rem;line-height:1.42;
+  color:var(--bronce-claro);border-left:2px solid var(--bronce);padding:4px 0 4px 22px;
+  text-align:left;max-width:520px;margin:30px auto 36px;
+}
+.ob-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+@media (max-width:600px){
+  .ob-step{padding:96px 18px 40px}
+  .ob-scale{grid-template-columns:repeat(5,1fr);gap:7px}
+  .ob-num{aspect-ratio:1/1.1;font-size:1rem}
+  .ob-choice{width:100%;min-width:0}
+  .ob-quote{font-size:1.14rem}
+}
+
 /* reveal + accesibilidad */
 .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1)}
 .rv.in{opacity:1;transform:none}
@@ -664,6 +766,52 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
 </style>
 </head>
 <body>
+
+<!-- ============ ONBOARDING DE BIENVENIDA ============ -->
+<div id="onboarding" role="dialog" aria-modal="true" aria-label="Bienvenida a Estás Para Más">
+  <div class="ob-top">
+    <span class="ob-brand">ESTÁS PARA MÁS</span>
+    <div class="ob-progress" id="ob-progress">
+      <span id="ob-progress-label">Pregunta 1 de 2</span>
+      <div class="ob-bar" aria-hidden="true"><i id="ob-bar-fill"></i></div>
+    </div>
+  </div>
+
+  <section class="ob-step" id="ob-welcome" aria-labelledby="ob-welcome-t">
+    <div class="ob-inner">
+      <p class="ob-eyebrow">Evento presencial · Buenos Aires</p>
+      <h2 id="ob-welcome-t" tabindex="-1">Antes de mostrarte todo lo que preparamos para vos, queremos hacerte dos preguntas.</h2>
+      <p class="ob-sub">Respondelas con honestidad. Esto puede ayudarte a ver dónde estás hoy y hacia dónde querés ir.</p>
+      <button type="button" class="btn btn-primary" id="ob-start">Comenzar <span class="arw">→</span></button>
+    </div>
+  </section>
+
+  <section class="ob-step" id="ob-life" aria-labelledby="ob-life-t">
+    <div class="ob-inner">
+      <h2 id="ob-life-t" tabindex="-1">Del 1 al 10, ¿cómo definirías tu vida hoy?</h2>
+      <p class="ob-sub">Elegí el número que mejor represente cómo te sentís actualmente.</p>
+      <div class="ob-scale" id="ob-scale" role="group" aria-label="Puntaje del 1 al 10"></div>
+      <div class="ob-scale-lbl" aria-hidden="true"><span>Recién empiezo</span><span>Plena</span></div>
+      <button type="button" class="ob-back" data-ob-back="welcome">← Volver</button>
+    </div>
+  </section>
+
+  <section class="ob-step" id="ob-resp" aria-labelledby="ob-resp-t">
+    <div class="ob-inner">
+      <h2 id="ob-resp-t" tabindex="-1">¿Estás dispuesta a asumir la responsabilidad que tu vida requiere?</h2>
+      <p class="ob-sub">No se trata de tener todo resuelto, sino de decidir que el cambio también depende de vos.</p>
+      <div class="ob-choices">
+        <button type="button" class="ob-choice" data-ob-resp="yes">Sí, estoy dispuesta</button>
+        <button type="button" class="ob-choice" data-ob-resp="no">Todavía no</button>
+      </div>
+      <button type="button" class="ob-back" data-ob-back="life">← Volver</button>
+    </div>
+  </section>
+
+  <section class="ob-step" id="ob-result" aria-labelledby="ob-result-t">
+    <div class="ob-inner ob-result" id="ob-result-content" aria-live="polite"></div>
+  </section>
+</div>
 
 <!-- ============ NAVBAR ============ -->
 <nav class="nav" id="nav">
@@ -696,41 +844,6 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
         <div class="hero-micro"><span class="dot"></span> Lunes 17 de agosto · Feriado · $45.000 hasta el 10/08</div>
       </div>
 
-      <!-- FIRMA: el medidor -->
-      <div class="meter" id="form-container">
-        <style>
-            .form-options { display: flex; flex-direction: column; gap: 8px; margin-top: 15px; }
-            .form-options-flex { display: flex; gap: 10px; margin-top: 15px; }
-            .form-options .notch, .form-options-flex .notch { height: auto; padding: 12px; font-size: 0.9rem; text-transform: none; justify-content: center; }
-            .form-result-text { font-size: 1rem; color: #fff; line-height: 1.6; }
-            .form-result-text strong { font-family: var(--display); font-size: 1.2rem; color: var(--bronce); display: block; margin-bottom: 10px; }
-        </style>
-        <div id="step-1">
-            <div class="meter-q">¿Que área de tu vida querés que mejore?</div>
-            <div class="form-options">
-                <button class="notch" onclick="nextStep(1, 'Relaciones amorosas')">Relaciones amorosas</button>
-                <button class="notch" onclick="nextStep(1, 'Entorno/amistades')">Entorno/amistades</button>
-                <button class="notch" onclick="nextStep(1, 'Trabajo/profesión')">Trabajo/profesión</button>
-                <button class="notch" onclick="nextStep(1, 'Económica')">Económica</button>
-                <button class="notch" onclick="nextStep(1, 'Conmigo misma')">Conmigo misma</button>
-            </div>
-        </div>
-        <div id="step-2" style="display:none;">
-            <div class="meter-q">Del 1 al 10 ¿Cómo def tu vida?</div>
-            <div class="scale" id="scale-new" style="margin-top: 15px;"></div>
-        </div>
-        <div id="step-3" style="display:none;">
-            <div class="meter-q">¿Estás dispuesta a tomar la responsabilidad que tu vida conlleva?</div>
-            <div class="form-options-flex">
-                <button class="notch" onclick="nextStep(3, 'Si')">Si</button>
-                <button class="notch" onclick="nextStep(3, 'No')">No</button>
-            </div>
-        </div>
-        <div id="step-result" style="display:none;">
-            <div class="meter-out" id="form-result" style="border-top:none; margin-top:0; padding-top:0;"></div>
-        </div>
-      </div>
-      </div>
     </div>
 
     <!-- stats de confianza -->
@@ -739,7 +852,6 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
       <div class="hstat"><b>Feriado</b><span>17 de agosto</span></div>
       <div class="hstat"><b>150</b><span>Mujeres en un mismo salón premium en capital federal</span></div>
     </div>
-  </div>
   </div>
 </header>
 
@@ -782,9 +894,115 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
           <div class="stock-txt">Quedan <b>40 de 150 lugares</b></div>
         </div>
 
-        <a href="#reservar" class="btn btn-dark btn-block">Reservo mi lugar <span class="arw">→</span></a>
+        <a href="#comprar" class="btn btn-dark btn-block">Reservo mi lugar <span class="arw">→</span></a>
         <p class="pay">Cuotas con Mercado Pago · transferencia o dólares.<br>Capital Federal, Buenos Aires. La dirección exacta se envía al confirmar.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPRA DE ENTRADAS ============ -->
+<section class="sec" id="comprar">
+  <style>
+    .buy-card{max-width:640px;margin:0 auto}
+    .buy-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 15px}
+    @media (max-width:560px){.buy-grid{grid-template-columns:1fr}}
+    .field select{
+      width:100%;padding:14px 16px;border:1px solid var(--linea);
+      background:var(--papel);font-family:var(--body);font-size:.96rem;
+      border-radius:var(--r);transition:.24s;color:var(--tinta);appearance:auto;
+    }
+    .field select:focus{outline:none;border-color:var(--bronce);background:#fff;box-shadow:0 0 0 3px rgba(168,124,79,.13)}
+    .f-err{display:none;font-size:.78rem;color:#B0473E;margin-top:6px;line-height:1.4}
+    .field.invalid input,.field.invalid select{border-color:#B0473E}
+    .field.invalid .f-err{display:block}
+    .terms-row{display:flex;gap:11px;align-items:flex-start;margin:4px 0 18px}
+    .terms-row input{width:17px;height:17px;margin-top:3px;flex:none;accent-color:var(--bronce)}
+    .terms-row label{font-size:.85rem;color:var(--gris);line-height:1.55;cursor:pointer}
+    .terms-row.invalid label{color:#B0473E}
+    .buy-summary{border:1px solid var(--linea);border-radius:var(--r);margin:22px 0;background:var(--papel)}
+    .buy-summary div{display:flex;justify-content:space-between;gap:14px;padding:11px 16px;border-bottom:1px solid var(--linea);font-size:.9rem}
+    .buy-summary div:last-child{border-bottom:none}
+    .buy-summary .lbl{font-family:var(--mono);font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gris);align-self:center}
+    .buy-summary .buy-total-row{background:var(--arena)}
+    .buy-summary .buy-total-row b{font-family:var(--display);font-size:1.3rem;font-weight:400}
+    .form-alert{display:none;background:#F6EBE9;border:1px solid #B0473E;color:#7C2F28;
+      padding:14px 16px;border-radius:var(--r);font-size:.88rem;line-height:1.55;margin-bottom:16px}
+    .form-alert.show{display:block}
+    .btn[disabled]{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+    .btn[disabled]:hover{transform:none;box-shadow:none}
+    .buy-spin{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,.4);
+      border-top-color:#fff;border-radius:50%;animation:buyspin .8s linear infinite;vertical-align:-2px}
+    @keyframes buyspin{to{transform:rotate(360deg)}}
+  </style>
+  <div class="narrow">
+    <div class="sec-head center rv">
+      <div class="eyebrow center">Reservá tu lugar</div>
+      <h2>Comprá tu entrada.</h2>
+      <p class="lead">Completás tus datos, pagás con Mercado Pago y tu lugar queda reservado. Te llega la confirmación por correo.</p>
+    </div>
+
+    <div class="form-card buy-card rv">
+      <h3>Datos de la asistente</h3>
+      <p>La entrada llega al correo que cargues acá. Revisalo dos veces.</p>
+
+      <form id="buy-form" novalidate>
+        <div class="buy-grid">
+          <div class="field">
+            <label for="buy-nombre">Nombre</label>
+            <input type="text" id="buy-nombre" name="firstName" autocomplete="given-name" required>
+            <p class="f-err" id="err-firstName" role="alert"></p>
+          </div>
+          <div class="field">
+            <label for="buy-apellido">Apellido</label>
+            <input type="text" id="buy-apellido" name="lastName" autocomplete="family-name" required>
+            <p class="f-err" id="err-lastName" role="alert"></p>
+          </div>
+        </div>
+        <div class="field">
+          <label for="buy-email">Email</label>
+          <input type="email" id="buy-email" name="email" autocomplete="email" inputmode="email" required>
+          <p class="f-err" id="err-email" role="alert"></p>
+        </div>
+        <div class="buy-grid">
+          <div class="field">
+            <label for="buy-whatsapp">WhatsApp</label>
+            <input type="tel" id="buy-whatsapp" name="phone" autocomplete="tel" inputmode="tel" placeholder="+54 9 11 ..." required>
+            <p class="f-err" id="err-phone" role="alert"></p>
+          </div>
+          <div class="field">
+            <label for="buy-dni">DNI <span style="text-transform:none;letter-spacing:0">(opcional)</span></label>
+            <input type="text" id="buy-dni" name="documentNumber" inputmode="numeric" placeholder="Solo números">
+            <p class="f-err" id="err-documentNumber" role="alert"></p>
+          </div>
+        </div>
+        <div class="field">
+          <label for="buy-cantidad">Cantidad de entradas</label>
+          <select id="buy-cantidad" name="quantity" required>
+            <option value="1">1 entrada</option>
+          </select>
+          <p class="f-err" id="err-quantity" role="alert"></p>
+        </div>
+
+        <div class="buy-summary" aria-live="polite">
+          <div><span class="lbl">Precio por entrada</span><span id="buy-unit">—</span></div>
+          <div><span class="lbl">Cantidad</span><span id="buy-qty">1</span></div>
+          <div class="buy-total-row"><span class="lbl">Total</span><b id="buy-total">—</b></div>
+        </div>
+
+        <div class="terms-row" id="terms-row">
+          <input type="checkbox" id="buy-terms" name="acceptTerms">
+          <label for="buy-terms">Acepto las condiciones de compra: la entrada no tiene devolución, pero es transferible a otra persona. La dirección exacta del salón se envía al confirmar.</label>
+        </div>
+        <p class="f-err" id="err-acceptTerms" role="alert" style="margin:-12px 0 14px"></p>
+
+        <div class="form-alert" id="buy-alert" role="alert"></div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="buy-submit">
+          Comprar entrada <span class="arw">→</span>
+        </button>
+        <p class="form-note">Pago seguro procesado por Mercado Pago. Tarjetas, cuotas y dinero en cuenta.<br>Tu entrada se confirma cuando el pago es aprobado.</p>
+      </form>
     </div>
   </div>
 </section>
@@ -857,7 +1075,7 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
       <div class="perk"><b>¿Dudás? Escribime</b>Por WhatsApp, antes de pagar. Te contesto yo</div>
     </div>
 
-    <a href="#reservar" class="btn btn-primary" style="padding:19px 44px;font-size:1rem">
+    <a href="#comprar" class="btn btn-primary" style="padding:19px 44px;font-size:1rem">
       Reservo mi lugar <span class="arw">→</span>
     </a>
     <p class="band-last">Cuando se llenen los 150 lugares, la próxima edición es el año que viene.</p>
@@ -901,42 +1119,6 @@ addEventListener('scroll',()=>{
   });tick=true;}
 },{passive:true});
 
-/* Formulario 3 pasos */
-let formState = { area: '', number: 0, res: '' };
-function nextStep(step, val) {
-    if(step === 1) {
-        formState.area = val;
-        document.getElementById('step-1').style.display = 'none';
-        document.getElementById('step-2').style.display = 'block';
-    } else if(step === 2) {
-        formState.number = val;
-        document.getElementById('step-2').style.display = 'none';
-        document.getElementById('step-3').style.display = 'block';
-    } else if(step === 3) {
-        formState.res = val;
-        document.getElementById('step-3').style.display = 'none';
-        const resEl = document.getElementById('step-result');
-        const out = document.getElementById('form-result');
-        resEl.style.display = 'block';
-        if(val === 'Si') {
-            out.innerHTML = '<div class="form-result-text">En <b>Estás para más</b> es el lugar donde tu vida va a dejar de ser un ' + formState.number + '/10 para ser un 10/10.<br><br>Siendo consciente que tu <b>' + formState.area + '</b> depende de vos!<br><br><strong>¡Qué poderosa por estar dispuesta a responsabilizarte!</strong></div>';
-        } else {
-            out.innerHTML = '<div class="form-result-text"><strong>Lo sentimos!</strong> Estás para más es un espacio donde se requiere compromiso para responsabilizarte de tu vida.</div>';
-        }
-    }
-}
-const scaleNew = document.getElementById('scale-new');
-if(scaleNew) {
-    for(let i=1;i<=10;i++){
-      const b = document.createElement('button');
-      b.className = 'notch' + (i===7?' seven':'');
-      b.textContent = i;
-      b.type = 'button';
-      b.onclick = () => nextStep(2, i);
-      scaleNew.appendChild(b);
-    }
-}
-
 /* contador al 17/08/2026 + salto de precio 10/08 */
 const target=new Date('2026-08-17T09:00:00-03:00');
 const jump=new Date('2026-08-10T23:59:00-03:00');
@@ -957,6 +1139,371 @@ const io=new IntersectionObserver(es=>{
   es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})
 },{threshold:.12,rootMargin:'0px 0px -60px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* ============ Onboarding de bienvenida ============
+   Dos preguntas antes de mostrar la landing. Los textos y resultados están
+   centralizados en OB_TEXTS (editar ahí, no en el markup).
+   Respuestas en sessionStorage (cambia STORAGE por localStorage si algún
+   día se quiere persistir entre sesiones).
+   Reinicio en desarrollo: ?onboarding=reset o window.resetOnboarding(). */
+(function(){
+  const root = document.documentElement;
+  const overlay = document.getElementById('onboarding');
+  if(!overlay) return;
+
+  const STORAGE = window.sessionStorage;
+  const KEYS = {
+    completed: 'event-onboarding-completed',
+    score: 'event-life-score',
+    resp: 'event-takes-responsibility'
+  };
+
+  /* ---- Textos centralizados ---- */
+  const OB_TEXTS = {
+    results: {
+      growth: { /* puntaje < 10 y "Sí" */
+        title: s => 'Tu vida hoy se siente como un ' + s + '/10.',
+        body: [
+          s => 'Estás Para Más es el espacio donde podés empezar a transformar ese ' + s + '/10 en una vida 10/10.',
+          () => 'Y lo más poderoso es que ya diste el primer paso: reconocer que tu transformación también depende de vos.'
+        ],
+        quote: 'Qué poderosa por estar dispuesta a responsabilizarte.',
+        primary: { label: 'Quiero transformar mi vida', action: 'enter' }
+      },
+      ten: { /* puntaje 10 y "Sí" */
+        title: () => 'Hoy definís tu vida como un 10/10.',
+        body: [
+          () => 'Eso habla de una mujer que reconoce todo lo que construyó, pero que también sabe que siempre puede expandirse, crecer y descubrir una nueva versión de sí misma.'
+        ],
+        quote: 'Estás Para Más no se trata solamente de mejorar lo que está mal. También se trata de potenciar todo lo que ya está bien.',
+        primary: { label: 'Quiero seguir expandiéndome', action: 'enter' }
+      },
+      notYet: { /* "Todavía no" */
+        title: () => 'Gracias por responder con honestidad.',
+        body: [
+          () => 'Estás Para Más es una experiencia para mujeres que están dispuestas a comprometerse con su proceso y asumir un rol activo en la vida que quieren construir.',
+          () => 'Quizás hoy todavía no sea tu momento. Y también está bien reconocerlo.'
+        ],
+        quote: 'Cuando estés lista para elegirte y responsabilizarte por tu transformación, este espacio va a estar esperándote.',
+        primary: { label: 'Quiero conocer la experiencia', action: 'enter' },
+        secondary: { label: 'Volver a responder', action: 'restart' }
+      }
+    }
+  };
+
+  /* ---- Analítica (conectar acá GA4 / Meta Pixel / GTM cuando existan) ---- */
+  function obTrack(event, params){
+    try{
+      if(typeof window.gtag === 'function') window.gtag('event', event, params || {});
+      if(typeof window.fbq === 'function') window.fbq('trackCustom', event, params || {});
+      if(Array.isArray(window.dataLayer)) window.dataLayer.push(Object.assign({event: event}, params));
+    }catch(e){}
+  }
+
+  const store = {
+    get: k => { try{ return STORAGE.getItem(k); }catch(e){ return null; } },
+    set: (k,v) => { try{ STORAGE.setItem(k,v); }catch(e){} },
+    del: k => { try{ STORAGE.removeItem(k); }catch(e){} }
+  };
+
+  window.resetOnboarding = function(){
+    Object.values(KEYS).forEach(store.del);
+    location.reload();
+  };
+
+  /* Si esta sesión ya lo completó, el overlay queda fuera del árbol accesible */
+  if(root.getAttribute('data-onboarding') !== 'pending'){
+    overlay.hidden = true;
+    return;
+  }
+
+  const steps = {
+    welcome: document.getElementById('ob-welcome'),
+    life: document.getElementById('ob-life'),
+    resp: document.getElementById('ob-resp'),
+    result: document.getElementById('ob-result')
+  };
+  const progress = document.getElementById('ob-progress');
+  const progressLabel = document.getElementById('ob-progress-label');
+  const barFill = document.getElementById('ob-bar-fill');
+  const resultContent = document.getElementById('ob-result-content');
+
+  const state = { step: 'welcome', lifeScore: null, takesResponsibility: null };
+  let animating = false;
+  let advanceTimer = null;
+
+  /* El contenido de la landing queda inerte mientras dura el onboarding */
+  const background = document.querySelectorAll('body > *:not(#onboarding)');
+  background.forEach(el => { el.inert = true; });
+
+  /* Escala 1–10 */
+  const scaleWrap = document.getElementById('ob-scale');
+  for(let i=1;i<=10;i++){
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'ob-num';
+    b.textContent = i;
+    b.setAttribute('aria-pressed','false');
+    b.setAttribute('aria-label','Puntaje ' + i + ' de 10');
+    b.addEventListener('click', () => selectScore(i, b));
+    scaleWrap.appendChild(b);
+  }
+
+  function updateTop(){
+    const map = { life: ['Pregunta 1 de 2','50%'], resp: ['Pregunta 2 de 2','100%'] };
+    if(map[state.step]){
+      progressLabel.textContent = map[state.step][0];
+      barFill.style.width = map[state.step][1];
+      progress.classList.add('show');
+    }else{
+      progress.classList.remove('show');
+    }
+  }
+
+  function goTo(next, dir){
+    if(animating || next === state.step) return;
+    animating = true;
+    const cur = steps[state.step];
+    const nxt = steps[next];
+    cur.classList.remove('active');
+    cur.style.transform = 'translateX(' + (dir * -42) + 'px)';
+    nxt.style.transition = 'none';
+    nxt.style.transform = 'translateX(' + (dir * 42) + 'px)';
+    nxt.getBoundingClientRect(); /* reflow para fijar el punto de partida */
+    nxt.style.transition = '';
+    nxt.style.transform = '';
+    nxt.classList.add('active');
+    state.step = next;
+    updateTop();
+    setTimeout(() => {
+      cur.style.transform = '';
+      animating = false;
+      const h = nxt.querySelector('h2');
+      if(h) h.focus({ preventScroll: true });
+    }, 470);
+  }
+
+  function selectScore(n, btn){
+    scaleWrap.querySelectorAll('.ob-num').forEach(b => b.setAttribute('aria-pressed','false'));
+    btn.setAttribute('aria-pressed','true');
+    state.lifeScore = n;
+    store.set(KEYS.score, String(n));
+    obTrack('life_score_selected', { life_score: n });
+    clearTimeout(advanceTimer);
+    advanceTimer = setTimeout(() => { if(state.step === 'life') goTo('resp', 1); }, 420);
+  }
+
+  function renderResult(){
+    const r = OB_TEXTS.results;
+    const data = state.takesResponsibility === false ? r.notYet
+      : (state.lifeScore === 10 ? r.ten : r.growth);
+    const s = state.lifeScore;
+    let html = '<h2 id="ob-result-t" tabindex="-1">' + data.title(s) + '</h2>';
+    data.body.forEach(p => { html += '<p class="ob-sub">' + p(s) + '</p>'; });
+    html += '<div class="ob-quote">' + data.quote + '</div>';
+    html += '<div class="ob-actions">';
+    html += '<button type="button" class="btn btn-primary" data-ob-action="' + data.primary.action + '">' + data.primary.label + ' <span class="arw">→</span></button>';
+    if(data.secondary){
+      html += '<button type="button" class="btn btn-ghost" data-ob-action="' + data.secondary.action + '">' + data.secondary.label + '</button>';
+    }
+    html += '</div>';
+    resultContent.innerHTML = html;
+  }
+
+  function complete(){
+    store.set(KEYS.completed, '1');
+    obTrack('onboarding_completed', {
+      life_score: state.lifeScore,
+      takes_responsibility: state.takesResponsibility
+    });
+    overlay.classList.add('ob-done');
+    setTimeout(() => {
+      root.removeAttribute('data-onboarding');
+      overlay.hidden = true;
+      background.forEach(el => { el.inert = false; });
+      window.scrollTo(0, 0);
+    }, 520);
+  }
+
+  /* Eventos */
+  document.getElementById('ob-start').addEventListener('click', () => goTo('life', 1));
+
+  overlay.querySelectorAll('[data-ob-back]').forEach(b => {
+    b.addEventListener('click', () => goTo(b.getAttribute('data-ob-back'), -1));
+  });
+
+  overlay.querySelectorAll('[data-ob-resp]').forEach(b => {
+    b.addEventListener('click', () => {
+      state.takesResponsibility = b.getAttribute('data-ob-resp') === 'yes';
+      store.set(KEYS.resp, String(state.takesResponsibility));
+      obTrack('responsibility_selected', { takes_responsibility: state.takesResponsibility });
+      renderResult();
+      goTo('result', 1);
+    });
+  });
+
+  resultContent.addEventListener('click', e => {
+    const btn = e.target.closest('[data-ob-action]');
+    if(!btn) return;
+    if(btn.getAttribute('data-ob-action') === 'enter'){
+      complete();
+    }else{
+      obTrack('onboarding_restarted', {});
+      state.lifeScore = null;
+      state.takesResponsibility = null;
+      store.del(KEYS.score);
+      store.del(KEYS.resp);
+      scaleWrap.querySelectorAll('.ob-num').forEach(b => b.setAttribute('aria-pressed','false'));
+      goTo('life', -1);
+    }
+  });
+
+  /* Arranque */
+  steps.welcome.classList.add('active');
+  obTrack('onboarding_started', {});
+})();
+
+/* ============ Compra de entradas (Mercado Pago Checkout Pro) ============
+   El frontend solo junta datos y cantidad. El precio y el total que se
+   cobran se calculan en el servidor: lo que se muestra acá sale de
+   GET /api/event y es meramente informativo. */
+(function(){
+  const form = document.getElementById('buy-form');
+  if(!form) return;
+
+  const submitBtn = document.getElementById('buy-submit');
+  const alertBox = document.getElementById('buy-alert');
+  const qtySelect = document.getElementById('buy-cantidad');
+  const unitEl = document.getElementById('buy-unit');
+  const qtyEl = document.getElementById('buy-qty');
+  const totalEl = document.getElementById('buy-total');
+
+  let eventInfo = null;
+  let submitting = false;
+
+  const fmt = n => n.toLocaleString('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0});
+
+  function renderTotals(){
+    if(!eventInfo) return;
+    const q = parseInt(qtySelect.value,10) || 1;
+    unitEl.textContent = fmt(eventInfo.ticketPrice);
+    qtyEl.textContent = q;
+    totalEl.textContent = fmt(eventInfo.ticketPrice * q);
+  }
+
+  function loadEvent(){
+    fetch('/api/event').then(r=>{
+      if(!r.ok) throw new Error('status '+r.status);
+      return r.json();
+    }).then(info=>{
+      eventInfo = info;
+      qtySelect.innerHTML = '';
+      for(let i=1;i<=info.maxTicketsPerPurchase;i++){
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = i === 1 ? '1 entrada' : i+' entradas';
+        qtySelect.appendChild(opt);
+      }
+      renderTotals();
+      submitBtn.disabled = false;
+    }).catch(()=>{
+      unitEl.textContent = totalEl.textContent = 'No disponible';
+      submitBtn.disabled = true;
+      showAlert('No pudimos cargar el precio de la entrada. Recargá la página para intentar de nuevo.');
+    });
+  }
+  submitBtn.disabled = true;
+  loadEvent();
+  qtySelect.addEventListener('change', renderTotals);
+
+  function showAlert(msg){ alertBox.textContent = msg; alertBox.classList.add('show'); }
+  function hideAlert(){ alertBox.textContent = ''; alertBox.classList.remove('show'); }
+
+  function setFieldError(name, msg){
+    const err = document.getElementById('err-'+name);
+    if(err){ err.textContent = msg || ''; }
+    if(name === 'acceptTerms'){
+      document.getElementById('terms-row').classList.toggle('invalid', !!msg);
+      if(err) err.style.display = msg ? 'block' : 'none';
+      return;
+    }
+    const input = form.elements[name];
+    if(input && input.closest('.field')) input.closest('.field').classList.toggle('invalid', !!msg);
+  }
+
+  function clearErrors(){
+    ['firstName','lastName','email','phone','documentNumber','quantity','acceptTerms']
+      .forEach(n=>setFieldError(n,''));
+    hideAlert();
+  }
+
+  /* Mismas reglas que el schema de Zod del servidor */
+  function validate(data){
+    const errors = {};
+    if(data.firstName.length < 2) errors.firstName = 'El nombre debe tener al menos 2 caracteres.';
+    if(data.lastName.length < 2) errors.lastName = 'El apellido debe tener al menos 2 caracteres.';
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email)) errors.email = 'Ingresá un email válido.';
+    if(!/^\+?[\d\s\-().]{8,20}$/.test(data.phone)) errors.phone = 'Ingresá un número de WhatsApp válido.';
+    if(data.documentNumber && !/^\d{7,9}$/.test(data.documentNumber)) errors.documentNumber = 'El DNI debe tener entre 7 y 9 dígitos.';
+    const max = eventInfo ? eventInfo.maxTicketsPerPurchase : 5;
+    if(!(data.quantity >= 1 && data.quantity <= max)) errors.quantity = 'Elegí entre 1 y '+max+' entradas.';
+    if(!data.acceptTerms) errors.acceptTerms = 'Tenés que aceptar las condiciones para continuar.';
+    return errors;
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(submitting) return; // evita doble clic / doble preferencia
+    clearErrors();
+
+    const data = {
+      firstName: form.elements.firstName.value.trim(),
+      lastName: form.elements.lastName.value.trim(),
+      email: form.elements.email.value.trim(),
+      phone: form.elements.phone.value.trim(),
+      documentNumber: form.elements.documentNumber.value.trim(),
+      quantity: parseInt(qtySelect.value,10),
+      acceptTerms: form.elements.acceptTerms.checked
+    };
+    if(!data.documentNumber) delete data.documentNumber;
+
+    const errors = validate(data);
+    const keys = Object.keys(errors);
+    if(keys.length){
+      keys.forEach(k=>setFieldError(k, errors[k]));
+      const first = form.elements[keys[0]];
+      if(first && first.focus) first.focus();
+      return;
+    }
+
+    submitting = true;
+    submitBtn.disabled = true;
+    const originalHtml = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<span class="buy-spin" aria-hidden="true"></span> Creando tu pago…';
+
+    fetch('/api/mercadopago/create-preference',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(data)
+    }).then(async r=>{
+      const body = await r.json().catch(()=>({}));
+      if(!r.ok){
+        if(body.fieldErrors){
+          Object.keys(body.fieldErrors).forEach(k=>setFieldError(k, body.fieldErrors[k]));
+        }
+        throw new Error(body.error || 'No pudimos iniciar el pago.');
+      }
+      if(!body.checkoutUrl) throw new Error('Respuesta inválida del servidor.');
+      submitBtn.innerHTML = '<span class="buy-spin" aria-hidden="true"></span> Redirigiendo a Mercado Pago…';
+      window.location.href = body.checkoutUrl;
+    }).catch(err=>{
+      submitting = false;
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalHtml;
+      showAlert(err.message || 'Algo salió mal. Esperá un momento y volvé a intentar.');
+    });
+  });
+})();
 </script>
 </body>
 </html>

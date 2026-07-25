@@ -13,40 +13,45 @@ Edición Buenos Aires, lunes 17 de agosto de 2026.
 
 ## Cómo correrlo
 
-No hay build, no hay dependencias, no hay npm. Es HTML, CSS y JavaScript vanilla
-en un solo archivo.
+La landing sigue siendo HTML/CSS/JS vanilla en un solo archivo
+(`public/index.html`), pero ahora vive dentro de una app **Next.js** que aporta
+el backend de venta de entradas (Mercado Pago Checkout Pro + Supabase).
 
 ```bash
-# Abrirlo directo
-open index.html
-
-# O con un servidor local, si preferís
-python3 -m http.server 8000
+npm install
+cp .env.example .env.local   # completar credenciales (ver MERCADOPAGO_SETUP.md)
+npm run dev                  # http://localhost:3000
 ```
 
 ## Estructura
 
 ```
 estas-para-mas-landing/
-├── index.html          Todo el sitio: markup, estilos y scripts
-├── netlify.toml        Configuración de deploy
-├── assets/
-│   └── img/            Las cuatro fotos del sitio
-└── README.md
+├── public/
+│   ├── index.html      La landing completa: markup, estilos y scripts
+│   └── assets/img/     Las cuatro fotos del sitio
+├── app/
+│   ├── api/            create-preference · webhook · status · event
+│   └── pago/           exitoso · pendiente · rechazado
+├── src/
+│   ├── config/event.ts Datos y precio del evento (fuente única de verdad)
+│   └── lib/            Mercado Pago, Supabase admin, validación, email
+├── supabase/migrations/
+├── MERCADOPAGO_SETUP.md  Guía de credenciales, webhook y pruebas
+└── netlify.toml
 ```
 
 Las tipografías (Fraunces, DM Sans, DM Mono) se cargan desde Google Fonts por CDN.
 
 ## Deploy
 
-El sitio está en Netlify, deployado por drag & drop. Para publicar cambios:
+El deploy por drag & drop de Netlify **ya no sirve**: la app necesita un runtime
+de Node (rutas API y webhook de Mercado Pago). Opciones:
 
-1. Entrar al panel del proyecto en Netlify
-2. Arrastrar **la carpeta completa** al recuadro de *Production deploys*
-3. La URL no cambia
-
-No hay integración con Git configurada. Si se conecta este repositorio a Netlify,
-el deploy pasa a ser automático en cada push a `main`.
+1. **Vercel (recomendado):** importar el repo, cargar las variables de entorno
+   (ver `MERCADOPAGO_SETUP.md`) y deployar en cada push a `main`.
+2. **Netlify con Git:** conectar el repositorio; `netlify.toml` ya usa el plugin
+   de Next.js. También hay que cargar las variables de entorno en el panel.
 
 ---
 
@@ -85,14 +90,15 @@ del ahora. Convive raro con el H1 de la página.
 
 ### Cosas técnicas
 
-- **El formulario de leads no tiene backend.** Simula el envío y muestra un mensaje
-  de éxito, pero no manda nada a ningún lado. Hay que conectarlo a Netlify Forms,
-  Mailchimp o lo que use la clienta.
+- **La venta de entradas ya tiene backend** (Mercado Pago Checkout Pro +
+  Supabase). Falta cargar credenciales reales y correr la migración: ver
+  `MERCADOPAGO_SETUP.md`.
 - **Los testimonios necesitan autorización escrita** de cada mujer antes de publicarse
   con nombre real.
-- **La fecha del salto de precio está hardcodeada** en dos lugares: el texto visible
-  y la constante `jump` del script al final del `index.html`. Si cambia, hay que
-  tocar ambos.
+- **La fecha del salto de precio** vive en `src/config/event.ts`
+  (`earlyPriceDeadline`) y es la que usa el cobro real. El texto visible de la
+  landing y la constante `jump` del countdown en `public/index.html` siguen
+  hardcodeados: si cambia la fecha, tocar los tres lugares.
 
 ---
 

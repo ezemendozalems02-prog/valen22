@@ -124,7 +124,7 @@ export async function POST(request: Request) {
           failure: `${siteUrl}/pago/rechazado?ref=${externalReference}`,
         },
         auto_return: "approved",
-        notification_url: `${siteUrl}/api/mercadopago/webhook`,
+        notification_url: `${siteUrl}/api/webhook`,
         statement_descriptor: eventConfig.statementDescriptor,
         metadata: {
           registration_id: registrationId,

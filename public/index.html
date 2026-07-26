@@ -235,11 +235,11 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
 
 /* — stats de confianza del hero — */
 .hero-stats{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
   background:rgba(255,255,255,.1);margin-top:78px;
   border-top:1px solid rgba(255,255,255,.1);position:relative;z-index:2;
 }
-.hstat{background:var(--berenjena);padding:30px 22px 34px;text-align:center}
+.hstat{background:var(--berenjena);padding:30px 22px 34px;text-align:center;min-width:0}
 .hstat b{
   display:block;font-family:var(--display);font-size:2.1rem;
   color:#fff;line-height:1;margin-bottom:8px;font-variation-settings:'opsz' 72;
@@ -733,6 +733,10 @@ html[data-onboarding="pending"] #onboarding{display:block}
   border-radius:var(--r);cursor:pointer;transition:.24s;min-width:232px;
 }
 .ob-choice:hover{border-color:var(--bronce);background:rgba(168,124,79,.30);transform:translateY(-2px)}
+.ob-choice[aria-pressed="true"]{
+  background:var(--bronce);border-color:var(--bronce-claro);color:#fff;font-weight:500;
+  box-shadow:0 0 0 3px rgba(201,162,119,.38);
+}
 .ob-back{
   margin-top:36px;background:none;border:none;color:#9C8A98;cursor:pointer;
   font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
@@ -772,7 +776,7 @@ html[data-onboarding="pending"] #onboarding{display:block}
   <div class="ob-top">
     <span class="ob-brand">ESTÁS PARA MÁS</span>
     <div class="ob-progress" id="ob-progress">
-      <span id="ob-progress-label">Pregunta 1 de 2</span>
+      <span id="ob-progress-label">Pregunta 1 de 3</span>
       <div class="ob-bar" aria-hidden="true"><i id="ob-bar-fill"></i></div>
     </div>
   </div>
@@ -780,9 +784,24 @@ html[data-onboarding="pending"] #onboarding{display:block}
   <section class="ob-step" id="ob-welcome" aria-labelledby="ob-welcome-t">
     <div class="ob-inner">
       <p class="ob-eyebrow">Evento presencial · Buenos Aires</p>
-      <h2 id="ob-welcome-t" tabindex="-1">Antes de mostrarte todo lo que preparamos para vos, queremos hacerte dos preguntas.</h2>
+      <h2 id="ob-welcome-t" tabindex="-1">Antes de mostrarte todo lo que preparamos para vos, queremos hacerte tres preguntas.</h2>
       <p class="ob-sub">Respondelas con honestidad. Esto puede ayudarte a ver dónde estás hoy y hacia dónde querés ir.</p>
       <button type="button" class="btn btn-primary" id="ob-start">Comenzar <span class="arw">→</span></button>
+    </div>
+  </section>
+
+  <section class="ob-step" id="ob-area" aria-labelledby="ob-area-t">
+    <div class="ob-inner">
+      <h2 id="ob-area-t" tabindex="-1">¿Qué área de tu vida querés que mejore?</h2>
+      <p class="ob-sub">Elegí la que más resuene con vos hoy.</p>
+      <div class="ob-choices" id="ob-area-choices" role="group" aria-label="Área de tu vida">
+        <button type="button" class="ob-choice" data-ob-area="Relaciones amorosas">Relaciones amorosas</button>
+        <button type="button" class="ob-choice" data-ob-area="Entorno/amistades">Entorno/amistades</button>
+        <button type="button" class="ob-choice" data-ob-area="Trabajo/profesión">Trabajo/profesión</button>
+        <button type="button" class="ob-choice" data-ob-area="Económica">Económica</button>
+        <button type="button" class="ob-choice" data-ob-area="Conmigo misma">Conmigo misma</button>
+      </div>
+      <button type="button" class="ob-back" data-ob-back="welcome">← Volver</button>
     </div>
   </section>
 
@@ -792,7 +811,7 @@ html[data-onboarding="pending"] #onboarding{display:block}
       <p class="ob-sub">Elegí el número que mejor represente cómo te sentís actualmente.</p>
       <div class="ob-scale" id="ob-scale" role="group" aria-label="Puntaje del 1 al 10"></div>
       <div class="ob-scale-lbl" aria-hidden="true"><span>Recién empiezo</span><span>Plena</span></div>
-      <button type="button" class="ob-back" data-ob-back="welcome">← Volver</button>
+      <button type="button" class="ob-back" data-ob-back="area">← Volver</button>
     </div>
   </section>
 
@@ -847,7 +866,7 @@ html[data-onboarding="pending"] #onboarding{display:block}
     </div>
 
     <!-- stats de confianza -->
-    <div class="hero-stats" style="grid-template-columns: repeat(3, 1fr);">
+    <div class="hero-stats">
       <div class="hstat"><b>11 hs</b><span>Una transformación de verdad de 9 am a 8 pm</span></div>
       <div class="hstat"><b>Feriado</b><span>17 de agosto</span></div>
       <div class="hstat"><b>150</b><span>Mujeres en un mismo salón premium en capital federal</span></div>
@@ -1038,11 +1057,6 @@ html[data-onboarding="pending"] #onboarding{display:block}
 <!-- ============ HISTORIA ============ -->
 <section class="sec dark" id="historia">
   <div class="wrap">
-    <div class="sec-head rv" style="max-width:720px">
-      <div class="eyebrow">Nuestra historia</div>
-      <h2>Nuestra historia</h2>
-    </div>
-
     <div class="story-grid">
       <div class="story-photo rv" style="background-image:url('assets/img/historia-valentina.jpg')"></div>
       <div class="story-body rv">
@@ -1093,10 +1107,10 @@ html[data-onboarding="pending"] #onboarding{display:block}
           que su vida puede ser más grande.
         </p>
         <div class="socials" style="justify-content: center;">
-          <a href="#" class="soc" aria-label="Instagram">
+          <a href="https://www.instagram.com/soyvalentinaparodi?igsh=cHdpaXQwY21iZzhs" class="soc" aria-label="Instagram" target="_blank" rel="noopener">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
           </a>
-          <a href="#" class="soc" aria-label="WhatsApp">
+          <a href="https://wa.me/5493541694363" class="soc" aria-label="WhatsApp" target="_blank" rel="noopener">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M21 11.5a8.4 8.4 0 01-12.6 7.3L3 21l2.3-5.3A8.4 8.4 0 1121 11.5z"/></svg>
           </a>
         </div>
@@ -1141,7 +1155,7 @@ const io=new IntersectionObserver(es=>{
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
 /* ============ Onboarding de bienvenida ============
-   Dos preguntas antes de mostrar la landing. Los textos y resultados están
+   Tres preguntas antes de mostrar la landing. Los textos y resultados están
    centralizados en OB_TEXTS (editar ahí, no en el markup).
    Respuestas en sessionStorage (cambia STORAGE por localStorage si algún
    día se quiere persistir entre sesiones).
@@ -1154,6 +1168,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
   const STORAGE = window.sessionStorage;
   const KEYS = {
     completed: 'event-onboarding-completed',
+    area: 'event-improvement-area',
     score: 'event-life-score',
     resp: 'event-takes-responsibility'
   };
@@ -1219,6 +1234,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
   const steps = {
     welcome: document.getElementById('ob-welcome'),
+    area: document.getElementById('ob-area'),
     life: document.getElementById('ob-life'),
     resp: document.getElementById('ob-resp'),
     result: document.getElementById('ob-result')
@@ -1227,8 +1243,9 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
   const progressLabel = document.getElementById('ob-progress-label');
   const barFill = document.getElementById('ob-bar-fill');
   const resultContent = document.getElementById('ob-result-content');
+  const areaChoices = document.getElementById('ob-area-choices');
 
-  const state = { step: 'welcome', lifeScore: null, takesResponsibility: null };
+  const state = { step: 'welcome', improvementArea: null, lifeScore: null, takesResponsibility: null };
   let animating = false;
   let advanceTimer = null;
 
@@ -1250,7 +1267,11 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
   }
 
   function updateTop(){
-    const map = { life: ['Pregunta 1 de 2','50%'], resp: ['Pregunta 2 de 2','100%'] };
+    const map = {
+      area: ['Pregunta 1 de 3','33%'],
+      life: ['Pregunta 2 de 3','66%'],
+      resp: ['Pregunta 3 de 3','100%']
+    };
     if(map[state.step]){
       progressLabel.textContent = map[state.step][0];
       barFill.style.width = map[state.step][1];
@@ -1283,6 +1304,20 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     }, 470);
   }
 
+  function selectArea(value, btn){
+    areaChoices.querySelectorAll('.ob-choice').forEach(b => b.setAttribute('aria-pressed','false'));
+    btn.setAttribute('aria-pressed','true');
+    state.improvementArea = value;
+    store.set(KEYS.area, value);
+    obTrack('improvement_area_selected', { improvement_area: value });
+    clearTimeout(advanceTimer);
+    advanceTimer = setTimeout(() => { if(state.step === 'area') goTo('life', 1); }, 420);
+  }
+
+  areaChoices.querySelectorAll('.ob-choice').forEach(b => {
+    b.addEventListener('click', () => selectArea(b.getAttribute('data-ob-area'), b));
+  });
+
   function selectScore(n, btn){
     scaleWrap.querySelectorAll('.ob-num').forEach(b => b.setAttribute('aria-pressed','false'));
     btn.setAttribute('aria-pressed','true');
@@ -1313,6 +1348,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
   function complete(){
     store.set(KEYS.completed, '1');
     obTrack('onboarding_completed', {
+      improvement_area: state.improvementArea,
       life_score: state.lifeScore,
       takes_responsibility: state.takesResponsibility
     });
@@ -1326,7 +1362,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
   }
 
   /* Eventos */
-  document.getElementById('ob-start').addEventListener('click', () => goTo('life', 1));
+  document.getElementById('ob-start').addEventListener('click', () => goTo('area', 1));
 
   overlay.querySelectorAll('[data-ob-back]').forEach(b => {
     b.addEventListener('click', () => goTo(b.getAttribute('data-ob-back'), -1));
@@ -1349,12 +1385,15 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
       complete();
     }else{
       obTrack('onboarding_restarted', {});
+      state.improvementArea = null;
       state.lifeScore = null;
       state.takesResponsibility = null;
+      store.del(KEYS.area);
       store.del(KEYS.score);
       store.del(KEYS.resp);
+      areaChoices.querySelectorAll('.ob-choice').forEach(b => b.setAttribute('aria-pressed','false'));
       scaleWrap.querySelectorAll('.ob-num').forEach(b => b.setAttribute('aria-pressed','false'));
-      goTo('life', -1);
+      goTo('area', -1);
     }
   });
 

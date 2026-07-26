@@ -8,7 +8,7 @@ Flujo completo:
 Formulario (landing) → POST /api/mercadopago/create-preference
   → inscripción "pending" en Supabase → preferencia en Mercado Pago
   → redirección a Checkout Pro → pago
-  → Mercado Pago llama a POST /api/mercadopago/webhook
+  → Mercado Pago llama a POST /api/webhook
   → el webhook consulta el pago real, verifica monto/moneda y confirma
   → /pago/exitoso consulta /api/registrations/status y muestra el estado real
 ```
@@ -93,7 +93,10 @@ variables de prueba cargadas y probar directo ahí.
 
 1. Panel de la app en MP → **Webhooks** → *Configurar notificaciones*.
 2. Modo **Pruebas** (y luego, aparte, modo **Producción** con la URL real).
-3. URL: `https://<tu-url-publica>/api/mercadopago/webhook`
+3. URL: `https://<tu-url-publica>/api/webhook`
+   (la ruta se acortó a propósito: el campo de URL de Mercado Pago tiene un
+   límite de caracteres y con dominios largos de Vercel una ruta más larga
+   como `/api/mercadopago/webhook` queda cortada al pegarla)
 4. Evento: **Pagos** (`payment`).
 5. Copiar la **clave secreta** que muestra el panel → `MERCADO_PAGO_WEBHOOK_SECRET`.
 
@@ -150,7 +153,7 @@ Webhook de prueba manual (nota: con `MERCADO_PAGO_WEBHOOK_SECRET` configurado
 va a responder 401 por firma inválida — eso también es una prueba):
 
 ```bash
-curl -X POST "http://localhost:3000/api/mercadopago/webhook?type=payment&data.id=<payment_id>" \
+curl -X POST "http://localhost:3000/api/webhook?type=payment&data.id=<payment_id>" \
   -H "Content-Type: application/json" -d "{}"
 ```
 

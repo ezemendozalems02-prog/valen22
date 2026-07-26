@@ -8,7 +8,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 /**
- * POST /api/mercadopago/webhook
+ * POST /api/webhook
  *
  * Nunca confía en el contenido de la notificación: usa el ID recibido para
  * consultar el pago directamente a Mercado Pago y decide solo con esa

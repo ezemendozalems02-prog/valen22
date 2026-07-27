@@ -26,9 +26,9 @@ export function getPaymentClient(): Payment {
   return new Payment(getClient());
 }
 
-/** URL base pública del sitio, sin barra final. */
+/** URL base pública del sitio, sin barra final ni espacios accidentales. */
 export function getSiteUrl(): string {
-  const url = process.env.NEXT_PUBLIC_SITE_URL;
+  const url = process.env.NEXT_PUBLIC_SITE_URL?.trim();
   if (!url) {
     throw new Error("Falta la variable de entorno NEXT_PUBLIC_SITE_URL.");
   }

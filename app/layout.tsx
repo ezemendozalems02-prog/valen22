@@ -5,6 +5,13 @@ export const metadata: Metadata = {
   title: "Estás Para Más — Pago",
   description:
     "Estado de tu inscripción al evento Estás Para Más, Buenos Aires 2026.",
+  icons: {
+    icon: [
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

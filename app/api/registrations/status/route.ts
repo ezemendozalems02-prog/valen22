@@ -30,12 +30,18 @@ export async function GET(request: Request) {
 
   const { data, error } = await supabase
     .from("event_registrations")
-    .select("status, payment_status, quantity, email, external_reference")
+    .select("status, payment_status, quantity, email, external_reference, total_amount, currency")
     .eq("external_reference", ref)
     .maybeSingle<
       Pick<
         RegistrationRow,
-        "status" | "payment_status" | "quantity" | "email" | "external_reference"
+        | "status"
+        | "payment_status"
+        | "quantity"
+        | "email"
+        | "external_reference"
+        | "total_amount"
+        | "currency"
       >
     >();
 
@@ -53,6 +59,8 @@ export async function GET(request: Request) {
     eventName: eventConfig.name,
     quantity: data.quantity,
     reference: data.external_reference,
+    totalAmount: Number(data.total_amount),
+    currency: data.currency,
     // Email enmascarado: alcanza para confirmar a dónde llega el correo.
     emailMasked: maskEmail(data.email),
   });

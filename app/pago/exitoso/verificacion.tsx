@@ -8,8 +8,33 @@ type StatusResponse = {
   eventName: string;
   quantity: number;
   reference: string;
+  totalAmount: number;
+  currency: string;
   emailMasked: string;
 };
+
+/**
+ * Purchase para el Meta Pixel, con eventID = referencia de la compra: si la
+ * persona recarga la página de éxito, Meta descarta los duplicados.
+ */
+function trackPurchase(data: StatusResponse) {
+  try {
+    const fbq = (window as { fbq?: (...args: unknown[]) => void }).fbq;
+    if (typeof fbq !== "function") return;
+    fbq(
+      "track",
+      "Purchase",
+      {
+        value: data.totalAmount,
+        currency: data.currency,
+        num_items: data.quantity,
+      },
+      { eventID: data.reference },
+    );
+  } catch {
+    // la analítica nunca debe romper la página de confirmación
+  }
+}
 
 type ViewState =
   | { kind: "verifying" }
@@ -52,6 +77,7 @@ export function VerificacionPago({ reference }: { reference: string | null }) {
       if (cancelled) return;
 
       if (data?.status === "confirmed") {
+        trackPurchase(data);
         setView({ kind: "confirmed", data });
         return;
       }

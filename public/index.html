@@ -7,6 +7,24 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1753795619133410');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1753795619133410&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 <meta name="description" content="Una experiencia de expansión de identidad para mujeres que saben que su vida puede ser más grande. 17 de agosto de 2026, Buenos Aires.">
 <script>
 /* Decide ANTES del primer paint si se muestra el onboarding de bienvenida,
@@ -1578,6 +1596,15 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
         throw new Error(body.error || 'No pudimos iniciar el pago.');
       }
       if(!body.checkoutUrl) throw new Error('Respuesta inválida del servidor.');
+      try{
+        if(typeof fbq === 'function'){
+          fbq('track', 'InitiateCheckout', {
+            value: body.totalAmount,
+            currency: body.currency,
+            num_items: body.quantity
+          });
+        }
+      }catch(err){}
       submitBtn.innerHTML = '<span class="buy-spin" aria-hidden="true"></span> Redirigiendo a Mercado Pago…';
       window.location.href = body.checkoutUrl;
     }).catch(err=>{

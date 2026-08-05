@@ -42,6 +42,7 @@ export type RegistrationRow = {
   mercadopago_status: string | null;
   mercadopago_status_detail: string | null;
   external_reference: string;
+  visitor_id: string | null;
   paid_at: string | null;
   confirmation_email_sent_at: string | null;
   created_at: string;

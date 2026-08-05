@@ -45,6 +45,9 @@ export const registrationSchema = z.object({
   acceptTerms: z.literal(true, {
     errorMap: () => ({ message: "Tenés que aceptar los términos para continuar." }),
   }),
+  // Id anónimo de sesión (sessionStorage) para el embudo de /admin. Opcional:
+  // si no llega o no es un UUID, simplemente no se guarda.
+  visitorId: z.string().uuid().optional().or(z.literal("").transform(() => undefined)),
 });
 
 export type RegistrationInput = z.infer<typeof registrationSchema>;

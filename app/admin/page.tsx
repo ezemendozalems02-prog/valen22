@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getSupabaseAdmin, type RegistrationRow } from "@/lib/supabase-admin";
+import { Funnel } from "./funnel";
 import { RegistrationsTable } from "./registrations-table";
 
 export const metadata: Metadata = {
@@ -64,6 +65,42 @@ export default async function AdminPage() {
   const visits7d = visits7dRes.count ?? 0;
   const conversionRate = visitsTotal > 0 ? (confirmed.length / visitsTotal) * 100 : null;
 
+  // Embudo: en qué parte del camino se quedan. Los pasos intermedios cuentan
+  // visitantes distintos (visitor_id); "Compran" solo suma las inscripciones
+  // que ya tienen visitor_id (las de antes de este contador quedan afuera a
+  // propósito, para no mezclar con el embudo nuevo).
+  const FUNNEL_EVENTS = [
+    "onboarding_started",
+    "onboarding_completed",
+    "checkout_viewed",
+    "checkout_initiated",
+  ] as const;
+  const [eventsRes, confirmedVisitorsRes] = await Promise.all([
+    supabase.from("analytics_events").select("visitor_id, event").in("event", FUNNEL_EVENTS),
+    supabase
+      .from("event_registrations")
+      .select("visitor_id")
+      .eq("status", "confirmed")
+      .not("visitor_id", "is", null)
+      .returns<{ visitor_id: string }[]>(),
+  ]);
+
+  const eventRows = eventsRes.data ?? [];
+  const distinctVisitors = (eventName: string) =>
+    new Set(eventRows.filter((r) => r.event === eventName).map((r) => r.visitor_id)).size;
+  const purchasedVisitors = new Set(
+    (confirmedVisitorsRes.data ?? []).map((r) => r.visitor_id),
+  ).size;
+
+  const funnelSteps = [
+    { key: "landing", label: "Llegan a la página", count: visitsTotal },
+    { key: "started", label: "Empiezan el cuestionario", count: distinctVisitors("onboarding_started") },
+    { key: "completed", label: "Terminan el cuestionario", count: distinctVisitors("onboarding_completed") },
+    { key: "viewed", label: "Miran el precio", count: distinctVisitors("checkout_viewed") },
+    { key: "initiated", label: "Inician el pago", count: distinctVisitors("checkout_initiated") },
+    { key: "purchased", label: "Compran", count: purchasedVisitors },
+  ];
+
   return (
     <main className="admin-page">
       <div className="admin-header">
@@ -112,6 +149,15 @@ export default async function AdminPage() {
           <span>Conversión (compran / visitan)</span>
         </div>
       </div>
+
+      <section className="admin-section">
+        <h2 className="admin-section-title">Embudo: dónde se quedan</h2>
+        <p className="admin-section-note">
+          Cada porcentaje es sobre el paso anterior, no sobre el total. Solo cuenta desde
+          que se activó este seguimiento — las compras más viejas no aparecen acá.
+        </p>
+        <Funnel steps={funnelSteps} />
+      </section>
 
       <RegistrationsTable rows={rows} />
     </main>

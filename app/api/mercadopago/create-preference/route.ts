@@ -84,6 +84,7 @@ export async function POST(request: Request) {
     status: "pending",
     payment_status: "pending",
     external_reference: externalReference,
+    visitor_id: data.visitorId ?? null,
   });
 
   if (insertError) {

@@ -28,11 +28,17 @@ export async function POST(request: Request) {
     typeof (body as { referrer?: unknown }).referrer === "string"
       ? (body as { referrer: string }).referrer.slice(0, 300)
       : null;
+  const visitorIdRaw = (body as { visitorId?: unknown }).visitorId;
+  const visitorId =
+    typeof visitorIdRaw === "string" &&
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(visitorIdRaw)
+      ? visitorIdRaw
+      : null;
 
   try {
     const supabase = getSupabaseAdmin();
     // No es crítico: si falla, no debe romper la navegación de nadie.
-    await supabase.from("page_visits").insert({ path, referrer });
+    await supabase.from("page_visits").insert({ path, referrer, visitor_id: visitorId });
   } catch (err) {
     console.error("[track-visit] Error registrando visita:", (err as Error).message);
   }

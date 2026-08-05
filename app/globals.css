@@ -362,6 +362,91 @@ a {
   color: var(--gris);
 }
 
+.admin-section {
+  max-width: 1180px;
+  margin: 0 auto 28px;
+  background: #fff;
+  border: 1px solid var(--linea);
+  border-radius: var(--r);
+  padding: 24px 26px 20px;
+}
+
+.admin-section-title {
+  font-family: var(--display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+
+.admin-section-note {
+  font-size: 0.82rem;
+  color: var(--gris);
+  margin-bottom: 20px;
+}
+
+.admin-funnel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.admin-funnel-step {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-funnel-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.admin-funnel-label {
+  font-size: 0.92rem;
+  color: var(--tinta);
+}
+
+.admin-funnel-count {
+  font-family: var(--display);
+  font-size: 1.15rem;
+  color: var(--berenjena);
+  white-space: nowrap;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.admin-funnel-count em {
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  color: var(--gris);
+}
+
+.admin-funnel-track {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--arena);
+  overflow: hidden;
+}
+
+.admin-funnel-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--berenjena), var(--bronce));
+  transition: width 0.4s ease;
+}
+
+@media (max-width: 720px) {
+  .admin-section {
+    padding: 20px 18px 16px;
+  }
+}
+
 .admin-toolbar {
   max-width: 1180px;
   margin: 0 auto 18px;

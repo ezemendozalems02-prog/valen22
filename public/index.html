@@ -31,10 +31,37 @@ src="https://www.facebook.com/tr?id=1753795619133410&ev=PageView&noscript=1"
      lo reciben solas vía el componente <Analytics /> en app/layout.tsx. -->
 <script defer src="/_vercel/insights/script.js"></script>
 
-<!-- Contador de visitas propio (gratis, vía Supabase). Una vez por sesión,
-     no por página vista: evita inflar el número si alguien navega adentro
-     del sitio. Nunca bloquea ni rompe nada si /api/track-visit falla. -->
+<!-- Contador de visitas propio + embudo (gratis, vía Supabase; no depende
+     de la API paga de Vercel). window.__epmVisitorId es un id anónimo por
+     sesión (sin cookies de terceros ni datos personales) que permite unir
+     los pasos de un mismo visitante: llega → hace el cuestionario → mira
+     el precio → inicia el pago → compra. Nunca bloquea ni rompe nada si
+     algún /api/track-* falla. -->
 <script>
+window.__epmVisitorId = (function(){
+  try{
+    var existing = sessionStorage.getItem('epm-visitor-id');
+    if(existing) return existing;
+    var id = (window.crypto && crypto.randomUUID) ? crypto.randomUUID()
+      : 'v-' + Date.now() + '-' + Math.random().toString(16).slice(2);
+    sessionStorage.setItem('epm-visitor-id', id);
+    return id;
+  }catch(e){
+    return 'v-' + Date.now() + '-' + Math.random().toString(16).slice(2);
+  }
+})();
+
+window.epmTrack = function(event, meta){
+  try{
+    fetch('/api/track-event', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ visitorId: window.__epmVisitorId, event: event, meta: meta || null }),
+      keepalive: true
+    }).catch(function(){});
+  }catch(e){}
+};
+
 (function(){
   try{
     if(sessionStorage.getItem('epm-visit-tracked')) return;
@@ -44,7 +71,7 @@ src="https://www.facebook.com/tr?id=1753795619133410&ev=PageView&noscript=1"
     fetch('/api/track-visit', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null }),
+      body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, visitorId: window.__epmVisitorId }),
       keepalive: true
     }).catch(function(){});
   }catch(e){}
@@ -1317,13 +1344,14 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     }
   };
 
-  /* ---- Analítica (conectar acá GA4 / Meta Pixel / GTM cuando existan) ---- */
+  /* ---- Analítica (GA4 / Meta Pixel / GTM si existen, + embudo propio en /admin) ---- */
   function obTrack(event, params){
     try{
       if(typeof window.gtag === 'function') window.gtag('event', event, params || {});
       if(typeof window.fbq === 'function') window.fbq('trackCustom', event, params || {});
       if(Array.isArray(window.dataLayer)) window.dataLayer.push(Object.assign({event: event}, params));
     }catch(e){}
+    if(typeof window.epmTrack === 'function') window.epmTrack(event, params);
   }
 
   const store = {
@@ -1613,7 +1641,8 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
       phone: form.elements.phone.value.trim(),
       documentNumber: form.elements.documentNumber.value.trim(),
       quantity: parseInt(qtySelect.value,10),
-      acceptTerms: form.elements.acceptTerms.checked
+      acceptTerms: form.elements.acceptTerms.checked,
+      visitorId: window.__epmVisitorId
     };
     if(!data.documentNumber) delete data.documentNumber;
 
@@ -1653,6 +1682,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
           });
         }
       }catch(err){}
+      if(typeof window.epmTrack === 'function') window.epmTrack('checkout_initiated', { quantity: body.quantity });
       submitBtn.innerHTML = '<span class="buy-spin" aria-hidden="true"></span> Redirigiendo a Mercado Pago…';
       window.location.href = body.checkoutUrl;
     }).catch(err=>{
@@ -1660,6 +1690,20 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalHtml;
       showAlert(err.message || 'Algo salió mal. Esperá un momento y volvé a intentar.');
+    });
+  });
+})();
+
+/* Paso "mira el checkout" del embudo: clic en cualquier CTA que lleva a
+   #comprar (una vez por sesión, no en cada clic). */
+(function(){
+  if(typeof window.epmTrack !== 'function') return;
+  let tracked = false;
+  document.querySelectorAll('a[href="#comprar"]').forEach(function(a){
+    a.addEventListener('click', function(){
+      if(tracked) return;
+      tracked = true;
+      window.epmTrack('checkout_viewed', {});
     });
   });
 })();

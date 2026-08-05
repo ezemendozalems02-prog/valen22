@@ -46,6 +46,24 @@ export default async function AdminPage() {
   const failed = rows.filter((r) => r.status === "payment_failed" || r.status === "error");
   const revenue = confirmed.reduce((sum, r) => sum + Number(r.total_amount), 0);
 
+  // Contador de visitas propio (ver /api/track-visit): no depende de la API
+  // paga de Vercel. "Hoy" y "7 días" son ventanas de tiempo, no días de
+  // calendario, para no complicarse con zonas horarias.
+  const now = Date.now();
+  const since24h = new Date(now - 24 * 60 * 60 * 1000).toISOString();
+  const since7d = new Date(now - 7 * 24 * 60 * 60 * 1000).toISOString();
+
+  const [visitsTotalRes, visits24hRes, visits7dRes] = await Promise.all([
+    supabase.from("page_visits").select("id", { count: "exact", head: true }),
+    supabase.from("page_visits").select("id", { count: "exact", head: true }).gte("created_at", since24h),
+    supabase.from("page_visits").select("id", { count: "exact", head: true }).gte("created_at", since7d),
+  ]);
+
+  const visitsTotal = visitsTotalRes.count ?? 0;
+  const visits24h = visits24hRes.count ?? 0;
+  const visits7d = visits7dRes.count ?? 0;
+  const conversionRate = visitsTotal > 0 ? (confirmed.length / visitsTotal) * 100 : null;
+
   return (
     <main className="admin-page">
       <div className="admin-header">
@@ -73,6 +91,25 @@ export default async function AdminPage() {
         <div className="admin-stat">
           <b>{failed.length}</b>
           <span>Fallidos / con error</span>
+        </div>
+      </div>
+
+      <div className="admin-stats admin-stats-visits">
+        <div className="admin-stat">
+          <b>{visits24h}</b>
+          <span>Visitas últimas 24 hs</span>
+        </div>
+        <div className="admin-stat">
+          <b>{visits7d}</b>
+          <span>Visitas últimos 7 días</span>
+        </div>
+        <div className="admin-stat">
+          <b>{visitsTotal}</b>
+          <span>Visitas totales</span>
+        </div>
+        <div className="admin-stat">
+          <b>{conversionRate !== null ? `${conversionRate.toFixed(1)}%` : "—"}</b>
+          <span>Conversión (compran / visitan)</span>
         </div>
       </div>
 

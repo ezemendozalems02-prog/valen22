@@ -331,6 +331,13 @@ a {
   gap: 14px;
 }
 
+.admin-stats-visits {
+  margin-top: -14px;
+}
+.admin-stats-visits .admin-stat b {
+  color: var(--bronce);
+}
+
 .admin-stat {
   background: #fff;
   border: 1px solid var(--linea);

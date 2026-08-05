@@ -30,6 +30,26 @@ src="https://www.facebook.com/tr?id=1753795619133410&ev=PageView&noscript=1"
      así que necesita el script a mano. Las páginas de Next (/admin, /pago/*)
      lo reciben solas vía el componente <Analytics /> en app/layout.tsx. -->
 <script defer src="/_vercel/insights/script.js"></script>
+
+<!-- Contador de visitas propio (gratis, vía Supabase). Una vez por sesión,
+     no por página vista: evita inflar el número si alguien navega adentro
+     del sitio. Nunca bloquea ni rompe nada si /api/track-visit falla. -->
+<script>
+(function(){
+  try{
+    if(sessionStorage.getItem('epm-visit-tracked')) return;
+    sessionStorage.setItem('epm-visit-tracked', '1');
+  }catch(e){}
+  try{
+    fetch('/api/track-visit', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null }),
+      keepalive: true
+    }).catch(function(){});
+  }catch(e){}
+})();
+</script>
 <meta name="description" content="Una experiencia de expansión de identidad para mujeres que saben que su vida puede ser más grande. 17 de agosto de 2026, Buenos Aires.">
 <script>
 /* Decide ANTES del primer paint si se muestra el onboarding de bienvenida,

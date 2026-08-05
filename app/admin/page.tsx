@@ -68,13 +68,10 @@ export default async function AdminPage() {
   // Embudo: en qué parte del camino se quedan. Los pasos intermedios cuentan
   // visitantes distintos (visitor_id); "Compran" solo suma las inscripciones
   // que ya tienen visitor_id (las de antes de este contador quedan afuera a
-  // propósito, para no mezclar con el embudo nuevo).
-  const FUNNEL_EVENTS = [
-    "onboarding_started",
-    "onboarding_completed",
-    "checkout_viewed",
-    "checkout_initiated",
-  ] as const;
+  // propósito, para no mezclar con el embudo nuevo). El cuestionario de
+  // bienvenida ya no existe en la landing, así que el embudo arranca
+  // directo en "miran el precio".
+  const FUNNEL_EVENTS = ["checkout_viewed", "checkout_initiated"] as const;
   const [eventsRes, confirmedVisitorsRes] = await Promise.all([
     supabase.from("analytics_events").select("visitor_id, event").in("event", FUNNEL_EVENTS),
     supabase
@@ -94,8 +91,6 @@ export default async function AdminPage() {
 
   const funnelSteps = [
     { key: "landing", label: "Llegan a la página", count: visitsTotal },
-    { key: "started", label: "Empiezan el cuestionario", count: distinctVisitors("onboarding_started") },
-    { key: "completed", label: "Terminan el cuestionario", count: distinctVisitors("onboarding_completed") },
     { key: "viewed", label: "Miran el precio", count: distinctVisitors("checkout_viewed") },
     { key: "initiated", label: "Inician el pago", count: distinctVisitors("checkout_initiated") },
     { key: "purchased", label: "Compran", count: purchasedVisitors },

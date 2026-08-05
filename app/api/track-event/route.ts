@@ -4,17 +4,13 @@ import { getSupabaseAdmin } from "@/lib/supabase-admin";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-/** Debe coincidir con la constraint de supabase/migrations/…_create_funnel_tracking.sql */
-const ALLOWED_EVENTS = new Set([
-  "onboarding_started",
-  "improvement_area_selected",
-  "life_score_selected",
-  "responsibility_selected",
-  "onboarding_completed",
-  "onboarding_restarted",
-  "checkout_viewed",
-  "checkout_initiated",
-]);
+/**
+ * Eventos que la landing manda hoy. La tabla analytics_events todavía
+ * permite los nombres del cuestionario de bienvenida (que se sacó de la
+ * landing) porque ya hay filas históricas con esos valores — no hace falta
+ * tocar la constraint de la base por esto.
+ */
+const ALLOWED_EVENTS = new Set(["checkout_viewed", "checkout_initiated"]);
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 

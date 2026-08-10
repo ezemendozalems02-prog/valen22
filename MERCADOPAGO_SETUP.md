@@ -206,6 +206,6 @@ funciona igual y queda una advertencia en los logs.
 ## Configuración del evento
 
 Precio, fechas, cupo por compra y textos salen de un solo lugar:
-[src/config/event.ts](src/config/event.ts). El salto de precio del 10/08
-($45.000 → $65.000) está ahí (`earlyPriceDeadline`) y se calcula siempre en el
-servidor.
+[src/config/event.ts](src/config/event.ts). El precio es $65.000 por entrada
+o $95.000 el pack de 2 (`ticketPrice` / `twoPackPrice`), y se calcula siempre
+en el servidor — nunca viaja desde el navegador.

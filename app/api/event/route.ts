@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { eventConfig, getTicketUnitPrice } from "@/config/event";
+import { eventConfig } from "@/config/event";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -14,7 +14,8 @@ export async function GET() {
     id: eventConfig.id,
     name: eventConfig.name,
     ticketName: eventConfig.ticketName,
-    ticketPrice: getTicketUnitPrice(),
+    ticketPrice: eventConfig.ticketPrice,
+    twoPackPrice: eventConfig.twoPackPrice,
     currency: eventConfig.currency,
     maxTicketsPerPurchase: eventConfig.maxTicketsPerPurchase,
     eventDate: eventConfig.eventDate,

@@ -402,7 +402,6 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
 }
 .pj-now{font-family:var(--mono);font-size:.7rem;letter-spacing:.11em;text-transform:uppercase;color:var(--bronce-claro)}
 .pj-then{font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;color:#C4B5C0}
-.cd-hi b{color:var(--bronce-claro)}
 .price-row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
 .price{font-family:var(--display);font-size:2.9rem;line-height:1;font-variation-settings:'opsz' 96}
 .price-alt{
@@ -707,9 +706,7 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
   .score-head{gap:24px}
   .band-perks{flex-direction:column}
   .perk{border-right:none;border-bottom:1px solid rgba(255,255,255,.13)}
-  .countdown{display:grid;grid-template-columns:repeat(2,1fr);width:100%}
-  .cd{border-right:none;border-bottom:1px solid rgba(255,255,255,.2)}
-  .cd:nth-child(odd){border-right:1px solid rgba(255,255,255,.2)}
+  .countdown{display:grid;grid-template-columns:repeat(3,1fr);width:100%}
 
   /* medidor: notches más altos y legibles para el dedo */
   .meter{padding:26px 20px 24px}
@@ -787,7 +784,7 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
         <div class="hero-ctas">
           <a href="#reservar" class="btn btn-primary">Ver qué pasa ese día <span class="arw">→</span></a>
         </div>
-        <div class="hero-micro"><span class="dot"></span> Lunes 17 de agosto · Feriado · $45.000 hasta el 10/08</div>
+        <div class="hero-micro"><span class="dot"></span> Lunes 17 de agosto · Feriado · $65.000 · 2 entradas $95.000</div>
       </div>
 
     </div>
@@ -839,11 +836,11 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
     <div class="entry-buy checkout-solo rv">
 
         <div class="pricejump">
-          <span class="pj-now">Hasta el 10 de agosto</span>
-          <span class="pj-then">Después: $65.000</span>
+          <span class="pj-now">Vas con alguien más</span>
+          <span class="pj-then">2 entradas: $95.000</span>
         </div>
         <div class="price-row">
-          <div class="price">$45.000</div>
+          <div class="price">$65.000</div>
           <div class="price-alt">o en cuotas</div>
         </div>
         <p class="anchor">
@@ -1028,12 +1025,11 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
       <div class="cd"><b id="d">--</b><span>Días</span></div>
       <div class="cd"><b id="h">--</b><span>Horas</span></div>
       <div class="cd"><b id="m">--</b><span>Minutos</span></div>
-      <div class="cd cd-hi"><b id="pj">--</b><span>Días a $45.000</span></div>
     </div>
 
     <div class="band-perks">
       <div class="perk"><b>Es feriado</b>No pedís el día, no avisás en el trabajo, no negociás con nadie</div>
-      <div class="perk"><b>$45.000 hasta el 10/08</b>Después pasa a $65.000. Es la misma silla</div>
+      <div class="perk"><b>$65.000 la entrada</b>Vas con alguien más: las 2 entradas salen $95.000</div>
       <div class="perk"><b>¿Dudás? Escribime</b>Por WhatsApp, antes de pagar. Te contesto yo</div>
     </div>
 
@@ -1081,18 +1077,15 @@ addEventListener('scroll',()=>{
   });tick=true;}
 },{passive:true});
 
-/* contador al 17/08/2026 + salto de precio 10/08 */
+/* contador al 17/08/2026 */
 const target=new Date('2026-08-17T09:00:00-03:00');
-const jump=new Date('2026-08-10T23:59:00-03:00');
 function tickCd(){
-  const now=new Date(), diff=target-now, dj=jump-now;
+  const now=new Date(), diff=target-now;
   if(diff>0){
     document.getElementById('d').textContent=Math.floor(diff/864e5);
     document.getElementById('h').textContent=Math.floor(diff/36e5)%24;
     document.getElementById('m').textContent=Math.floor(diff/6e4)%60;
   }
-  const pj=document.getElementById('pj');
-  if(pj) pj.textContent = dj>0 ? Math.floor(dj/864e5) : '0';
 }
 tickCd();setInterval(tickCd,30000);
 
@@ -1125,9 +1118,13 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
   function renderTotals(){
     if(!eventInfo) return;
     const q = parseInt(qtySelect.value,10) || 1;
+    // El pack de 2 entradas tiene precio propio, no es el doble de 1.
+    const total = (q === 2 && eventInfo.twoPackPrice)
+      ? eventInfo.twoPackPrice
+      : eventInfo.ticketPrice * q;
     unitEl.textContent = fmt(eventInfo.ticketPrice);
     qtyEl.textContent = q;
-    totalEl.textContent = fmt(eventInfo.ticketPrice * q);
+    totalEl.textContent = fmt(total);
   }
 
   function loadEvent(){
@@ -1140,7 +1137,8 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
       for(let i=1;i<=info.maxTicketsPerPurchase;i++){
         const opt = document.createElement('option');
         opt.value = i;
-        opt.textContent = i === 1 ? '1 entrada' : i+' entradas';
+        opt.textContent = (i === 1 ? '1 entrada' : i+' entradas')
+          + (i === 2 && info.twoPackPrice ? ' — ' + fmt(info.twoPackPrice) : '');
         qtySelect.appendChild(opt);
       }
       renderTotals();

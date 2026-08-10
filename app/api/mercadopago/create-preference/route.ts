@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { randomUUID } from "node:crypto";
-import { eventConfig, getTicketUnitPrice } from "@/config/event";
+import { eventConfig, getOrderTotal, getUnitPriceForOrder } from "@/config/event";
 import {
   getPreferenceClient,
   getSiteUrl,
@@ -48,9 +48,8 @@ export async function POST(request: Request) {
   }
 
   const data = parsed.data;
-  const now = new Date();
-  const unitPrice = getTicketUnitPrice(now);
-  const totalAmount = unitPrice * data.quantity;
+  const totalAmount = getOrderTotal(data.quantity);
+  const unitPrice = getUnitPriceForOrder(data.quantity);
 
   const registrationId = randomUUID();
   const externalReference = `epm-${registrationId}`;

@@ -10,18 +10,10 @@ export const eventConfig = {
   id: "estas-para-mas-bsas-2026",
   name: "Estás Para Más — Edición Buenos Aires 2026",
   ticketName: "Entrada general",
-  /** Precio de 1 entrada. */
-  ticketPrice: 65000,
-  /** Precio del pack de 2 entradas juntas (no es el doble de ticketPrice). */
-  twoPackPrice: 95000,
+  /** Precio fijo por entrada, sin fecha límite ni descuento por cantidad. */
+  ticketPrice: 45000,
   currency: "ARS",
-  /**
-   * Tope de 2 por compra: es hasta donde está definido el precio en pack.
-   * Para más lugares, se hace una segunda compra aparte. Si en algún
-   * momento se define un precio para 3+, hay que extender getOrderTotal()
-   * además de subir este número.
-   */
-  maxTicketsPerPurchase: 2,
+  maxTicketsPerPurchase: 5,
   eventDate: "2026-08-17",
   eventTime: "09:00",
   location:
@@ -31,21 +23,17 @@ export const eventConfig = {
   contactEmail: "hola@estasparamas.com",
 } as const;
 
-/** Precio "de lista" por entrada (para mostrar "$65.000 c/u"). */
+/** Precio por entrada, calculado siempre en el servidor. */
 export function getTicketUnitPrice(): number {
   return eventConfig.ticketPrice;
 }
 
-/** Total real a cobrar para una cantidad dada, calculado siempre en el servidor. */
+/** Total para una cantidad dada, calculado siempre en el servidor. */
 export function getOrderTotal(quantity: number): number {
-  return quantity === 2 ? eventConfig.twoPackPrice : eventConfig.ticketPrice * quantity;
+  return eventConfig.ticketPrice * quantity;
 }
 
-/**
- * Precio "por unidad" para guardar en la fila y para el ítem de Mercado
- * Pago (unit_price × quantity tiene que dar el total exacto). Con el pack
- * de 2 esto da 47.500, no 65.000 — es intencional.
- */
+/** Precio "por unidad" para guardar en la fila y para el ítem de Mercado Pago. */
 export function getUnitPriceForOrder(quantity: number): number {
-  return getOrderTotal(quantity) / quantity;
+  return eventConfig.ticketPrice;
 }

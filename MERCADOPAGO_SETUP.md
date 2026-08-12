@@ -206,6 +206,6 @@ funciona igual y queda una advertencia en los logs.
 ## Configuración del evento
 
 Precio, fechas, cupo por compra y textos salen de un solo lugar:
-[src/config/event.ts](src/config/event.ts). El precio es $65.000 por entrada
-o $95.000 el pack de 2 (`ticketPrice` / `twoPackPrice`), y se calcula siempre
-en el servidor — nunca viaja desde el navegador.
+[src/config/event.ts](src/config/event.ts). El precio es $45.000 fijo por
+entrada (`ticketPrice`), sin fecha límite ni descuento por cantidad, y se
+calcula siempre en el servidor — nunca viaja desde el navegador.

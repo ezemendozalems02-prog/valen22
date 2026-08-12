@@ -395,13 +395,6 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
   max-width:560px;margin:28px auto 0;
 }
 
-.pricejump{
-  display:flex;justify-content:space-between;align-items:center;gap:10px;
-  background:var(--berenjena);color:#fff;padding:9px 14px;
-  border-radius:var(--r);margin-bottom:16px;flex-wrap:wrap;
-}
-.pj-now{font-family:var(--mono);font-size:.7rem;letter-spacing:.11em;text-transform:uppercase;color:var(--bronce-claro)}
-.pj-then{font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;color:#C4B5C0}
 .price-row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
 .price{font-family:var(--display);font-size:2.9rem;line-height:1;font-variation-settings:'opsz' 96}
 .price-alt{
@@ -723,7 +716,6 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
 
   /* precio */
   .price{font-size:2.4rem}
-  .pricejump{flex-direction:column;align-items:flex-start;gap:3px;padding:10px 14px}
   .entry-for{padding:14px 15px}
 
   /* tap targets del footer */
@@ -784,7 +776,7 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
         <div class="hero-ctas">
           <a href="#reservar" class="btn btn-primary">Ver qué pasa ese día <span class="arw">→</span></a>
         </div>
-        <div class="hero-micro"><span class="dot"></span> Lunes 17 de agosto · Feriado · $65.000 · 2 entradas $95.000</div>
+        <div class="hero-micro"><span class="dot"></span> Lunes 17 de agosto · Feriado · $45.000</div>
       </div>
 
     </div>
@@ -835,12 +827,8 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
     <!-- Checkout: precio + cupos + reserva -->
     <div class="entry-buy checkout-solo rv">
 
-        <div class="pricejump">
-          <span class="pj-now">Vas con alguien más</span>
-          <span class="pj-then">2 entradas: $95.000</span>
-        </div>
         <div class="price-row">
-          <div class="price">$65.000</div>
+          <div class="price">$45.000</div>
           <div class="price-alt">o en cuotas</div>
         </div>
         <p class="anchor">
@@ -1029,7 +1017,7 @@ h3{font-size:1.28rem;line-height:1.25;font-variation-settings:'opsz' 36}
 
     <div class="band-perks">
       <div class="perk"><b>Es feriado</b>No pedís el día, no avisás en el trabajo, no negociás con nadie</div>
-      <div class="perk"><b>$65.000 la entrada</b>Vas con alguien más: las 2 entradas salen $95.000</div>
+      <div class="perk"><b>$45.000 la entrada</b>Pago único o en cuotas con Mercado Pago</div>
       <div class="perk"><b>¿Dudás? Escribime</b>Por WhatsApp, antes de pagar. Te contesto yo</div>
     </div>
 
@@ -1118,13 +1106,9 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
   function renderTotals(){
     if(!eventInfo) return;
     const q = parseInt(qtySelect.value,10) || 1;
-    // El pack de 2 entradas tiene precio propio, no es el doble de 1.
-    const total = (q === 2 && eventInfo.twoPackPrice)
-      ? eventInfo.twoPackPrice
-      : eventInfo.ticketPrice * q;
     unitEl.textContent = fmt(eventInfo.ticketPrice);
     qtyEl.textContent = q;
-    totalEl.textContent = fmt(total);
+    totalEl.textContent = fmt(eventInfo.ticketPrice * q);
   }
 
   function loadEvent(){
@@ -1137,8 +1121,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
       for(let i=1;i<=info.maxTicketsPerPurchase;i++){
         const opt = document.createElement('option');
         opt.value = i;
-        opt.textContent = (i === 1 ? '1 entrada' : i+' entradas')
-          + (i === 2 && info.twoPackPrice ? ' — ' + fmt(info.twoPackPrice) : '');
+        opt.textContent = i === 1 ? '1 entrada' : i+' entradas';
         qtySelect.appendChild(opt);
       }
       renderTotals();

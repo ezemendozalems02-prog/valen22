@@ -15,7 +15,6 @@ export async function GET() {
     name: eventConfig.name,
     ticketName: eventConfig.ticketName,
     ticketPrice: eventConfig.ticketPrice,
-    twoPackPrice: eventConfig.twoPackPrice,
     currency: eventConfig.currency,
     maxTicketsPerPurchase: eventConfig.maxTicketsPerPurchase,
     eventDate: eventConfig.eventDate,

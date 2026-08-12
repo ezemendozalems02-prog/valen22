@@ -95,7 +95,7 @@ del ahora. Convive raro con el H1 de la página.
   `MERCADOPAGO_SETUP.md`.
 - **Los testimonios necesitan autorización escrita** de cada mujer antes de publicarse
   con nombre real.
-- **Los precios** viven en `src/config/event.ts` (`ticketPrice`, `twoPackPrice`)
+- **Los precios** viven en `src/config/event.ts` (`ticketPrice`)
   y son los que usa el cobro real. El texto visible de la landing en
   `public/index.html` sigue hardcodeado: si cambian los precios, tocar
   también ahí (hero, tarjeta de compra, banda final).
@@ -110,12 +110,12 @@ Referencia rápida para verificar que nada quede desactualizado.
 - **Horario:** de 9:00 a 20:00
 - **Lugar:** salón privado en Capital Federal, Buenos Aires (dirección exacta se envía al confirmar)
 - **Capacidad:** 150 lugares
-- **Precio:** $65.000 la entrada; 2 entradas juntas, $95.000
+- **Precio:** $45.000 la entrada, fijo
 - **Pago:** cuotas con Mercado Pago; transferencia y dólares en un solo pago
 - **Devoluciones:** no hay, pero la entrada es transferible a otra persona
 
 ### Los tres escalones del producto
 
-1. **Estás Para Más** — el evento, $65.000
+1. **Estás Para Más** — el evento, $45.000
 2. **Transformarte** — USD 300, 3 meses, 24 encuentros grupales
 3. **Claridad Definitiva** — sin precio público, 6 meses, 1:1 + grupal, requiere entrevista previa

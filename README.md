@@ -1,7 +1,7 @@
 # Estás Para Más — Landing del evento
 
 Landing de una sola página para el evento presencial **Estás Para Más**, de Valentina Parodi.
-Edición Buenos Aires, lunes 17 de agosto de 2026.
+Edición Buenos Aires, domingo 20 de septiembre de 2026.
 
 **Preview en vivo:** https://estasparamas-preview.netlify.app
 
@@ -106,7 +106,7 @@ del ahora. Convive raro con el H1 de la página.
 
 Referencia rápida para verificar que nada quede desactualizado.
 
-- **Fecha:** lunes 17 de agosto de 2026, feriado
+- **Fecha:** domingo 20 de septiembre de 2026
 - **Horario:** de 9:00 a 20:00
 - **Lugar:** salón privado en Capital Federal, Buenos Aires (dirección exacta se envía al confirmar)
 - **Capacidad:** 150 lugares

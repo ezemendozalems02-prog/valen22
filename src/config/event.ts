@@ -14,7 +14,7 @@ export const eventConfig = {
   ticketPrice: 45000,
   currency: "ARS",
   maxTicketsPerPurchase: 5,
-  eventDate: "2026-08-17",
+  eventDate: "2026-09-20",
   eventTime: "09:00",
   location:
     "Salón privado en Capital Federal, Buenos Aires (la dirección exacta se envía al confirmar)",

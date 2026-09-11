@@ -4,7 +4,7 @@ import { Funnel } from "./funnel";
 import { RegistrationsTable } from "./registrations-table";
 
 export const metadata: Metadata = {
-  title: "Panel — Estás Para Más",
+  title: "Panel — Estoy Para Más",
   robots: { index: false, follow: false },
 };
 
@@ -99,7 +99,7 @@ export default async function AdminPage() {
   return (
     <main className="admin-page">
       <div className="admin-header">
-        <span className="pago-logo">ESTÁS PARA MÁS · Panel</span>
+        <span className="pago-logo">ESTOY PARA MÁS · Panel</span>
         <form method="POST" action="/api/admin/logout">
           <button type="submit" className="admin-logout">
             Cerrar sesión

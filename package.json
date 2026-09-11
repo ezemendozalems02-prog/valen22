@@ -2,7 +2,7 @@
   "name": "estas-para-mas-landing",
   "version": "1.0.0",
   "private": true,
-  "description": "Landing del evento Estás Para Más con venta de entradas vía Mercado Pago Checkout Pro",
+  "description": "Landing del evento Estoy Para Más con venta de entradas vía Mercado Pago Checkout Pro",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

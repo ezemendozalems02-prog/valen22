@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Ingresar — Panel Estás Para Más",
+  title: "Ingresar — Panel Estoy Para Más",
   robots: { index: false, follow: false },
 };
 
@@ -14,7 +14,7 @@ export default async function AdminLoginPage({
 
   return (
     <main className="pago-page">
-      <span className="pago-logo">ESTÁS PARA MÁS</span>
+      <span className="pago-logo">ESTOY PARA MÁS</span>
       <section className="pago-card" style={{ maxWidth: 400 }}>
         <p className="pago-eyebrow">Panel privado</p>
         <h1 style={{ fontSize: "1.6rem" }}>Ingresar</h1>

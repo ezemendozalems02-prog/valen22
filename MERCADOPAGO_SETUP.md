@@ -1,6 +1,6 @@
 # Guía de configuración y prueba — Mercado Pago Checkout Pro
 
-Venta de entradas del evento **Estás Para Más** con Next.js + Supabase + Mercado Pago.
+Venta de entradas del evento **Estoy Para Más** con Next.js + Supabase + Mercado Pago.
 
 Flujo completo:
 
@@ -21,7 +21,7 @@ de Mercado Pago. Visitar `/pago/exitoso` a mano no confirma nada.
 ## 1. Crear la aplicación en Mercado Pago
 
 1. Entrar a [Mercado Pago Developers](https://www.mercadopago.com.ar/developers/panel/app) con la cuenta que va a **cobrar**.
-2. **Crear aplicación** → nombre `Estás Para Más`, producto **CheckoutPro**, modelo *Pagos online*.
+2. **Crear aplicación** → nombre `Estoy Para Más`, producto **CheckoutPro**, modelo *Pagos online*.
 3. Queda creada con dos juegos de credenciales: **Prueba** y **Producción**.
 
 ## 2. Obtener credenciales de prueba

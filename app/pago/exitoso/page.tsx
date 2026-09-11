@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { VerificacionPago } from "./verificacion";
 
 export const metadata: Metadata = {
-  title: "Verificando tu pago — Estás Para Más",
+  title: "Verificando tu pago — Estoy Para Más",
 };
 
 /**
@@ -21,7 +21,7 @@ export default async function PagoExitosoPage({
 
   return (
     <main className="pago-page">
-      <span className="pago-logo">ESTÁS PARA MÁS</span>
+      <span className="pago-logo">ESTOY PARA MÁS</span>
       <VerificacionPago reference={reference} />
     </main>
   );

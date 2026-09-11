@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Pago no completado — Estás Para Más",
+  title: "Pago no completado — Estoy Para Más",
 };
 
 export default function PagoRechazadoPage() {
   return (
     <main className="pago-page">
-      <span className="pago-logo">ESTÁS PARA MÁS</span>
+      <span className="pago-logo">ESTOY PARA MÁS</span>
       <section className="pago-card">
         <div className="pago-badge err" aria-hidden="true">
           ✕

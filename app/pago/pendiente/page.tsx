@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Pago en proceso — Estás Para Más",
+  title: "Pago en proceso — Estoy Para Más",
 };
 
 export default async function PagoPendientePage({
@@ -14,7 +14,7 @@ export default async function PagoPendientePage({
 
   return (
     <main className="pago-page">
-      <span className="pago-logo">ESTÁS PARA MÁS</span>
+      <span className="pago-logo">ESTOY PARA MÁS</span>
       <section className="pago-card">
         <div className="pago-badge warn" aria-hidden="true">
           ⏳

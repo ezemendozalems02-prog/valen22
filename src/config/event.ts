@@ -8,7 +8,7 @@
 
 export const eventConfig = {
   id: "estas-para-mas-bsas-2026",
-  name: "Estás Para Más — Edición Buenos Aires 2026",
+  name: "Estoy Para Más — Edición Buenos Aires 2026",
   ticketName: "Entrada general",
   /** Precio fijo por entrada, sin fecha límite ni descuento por cantidad. */
   ticketPrice: 45000,

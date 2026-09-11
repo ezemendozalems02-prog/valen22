@@ -1,6 +1,6 @@
-# Estás Para Más — Landing del evento
+# Estoy Para Más — Landing del evento
 
-Landing de una sola página para el evento presencial **Estás Para Más**, de Valentina Parodi.
+Landing de una sola página para el evento presencial **Estoy Para Más**, de Valentina Parodi.
 Edición Buenos Aires, domingo 20 de septiembre de 2026.
 
 **Preview en vivo:** https://estasparamas-preview.netlify.app
@@ -116,6 +116,6 @@ Referencia rápida para verificar que nada quede desactualizado.
 
 ### Los tres escalones del producto
 
-1. **Estás Para Más** — el evento, $45.000
+1. **Estoy Para Más** — el evento, $45.000
 2. **Transformarte** — USD 300, 3 meses, 24 encuentros grupales
 3. **Claridad Definitiva** — sin precio público, 6 meses, 1:1 + grupal, requiere entrevista previa

@@ -3,9 +3,9 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Estás Para Más — Pago",
+  title: "Estoy Para Más — Pago",
   description:
-    "Estado de tu inscripción al evento Estás Para Más, Buenos Aires 2026.",
+    "Estado de tu inscripción al evento Estoy Para Más, Buenos Aires 2026.",
   icons: {
     icon: [
       { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },

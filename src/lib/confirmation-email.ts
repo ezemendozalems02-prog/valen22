@@ -10,7 +10,7 @@ import type { RegistrationRow } from "@/lib/supabase-admin";
  * existan estas variables de entorno:
  *
  *   RESEND_API_KEY=re_xxxxxxxx
- *   CONFIRMATION_EMAIL_FROM="Estás Para Más <hola@tudominio.com>"
+ *   CONFIRMATION_EMAIL_FROM="Estoy Para Más <hola@tudominio.com>"
  *
  * Si no están configuradas, loguea una advertencia y no bloquea el flujo de
  * pago. El webhook solo la llama la primera vez que un pago pasa a aprobado
